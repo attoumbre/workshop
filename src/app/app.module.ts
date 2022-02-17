@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { BoardModule } from './board/board.module';
 import { HomeModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
+import {MatIconModule} from '@angular/material/icon'
 export * from './models/index';
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ export * from './models/index';
     SharedModule,
     BoardModule,
     HomeModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule
 
   ],
   providers: [],

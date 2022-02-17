@@ -5,6 +5,8 @@ import { BoardRoutingModule } from './board-routing.module';
 import { BoardComponent } from './board/board.component';
 import { ListComponent } from './components/list/list.component';
 import { TaskComponent } from './components/task/task.component';
+import { MatIconModule } from '@angular/material/icon';
+
 
 
 @NgModule({
@@ -15,7 +17,10 @@ import { TaskComponent } from './components/task/task.component';
   ],
   imports: [
     CommonModule,
-    BoardRoutingModule
+    BoardRoutingModule,
+    MatIconModule
+
+
   ]
 })
 export class BoardModule { }
