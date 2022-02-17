@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { TaskSchema } from 'src/app/app.module';
+import { ListSchema, TaskSchema } from 'src/app/app.module';
+import { TaskService } from 'src/app/core/services/task.service';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 
 @Component({
@@ -11,8 +12,10 @@ import { ModalComponent } from 'src/app/shared/components/modal/modal.component'
 export class TaskComponent implements OnInit {
 
   @Input() task!: TaskSchema;
+  @Input() list?: ListSchema;
   @Output() editTask: EventEmitter<TaskSchema> = new EventEmitter();
-  constructor(public dialog: MatDialog) { }
+  
+  constructor(public dialog: MatDialog, public tasksService: TaskService) {}
   ngOnInit(): void {
   }
 
@@ -25,9 +28,10 @@ export class TaskComponent implements OnInit {
   removeTask(taskId: string): void {
     console.log('Eliminar tarea', taskId);
     const dialogRef = this.dialog.open(ModalComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('Eliminar tarea', result);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (this.list) {
+        this.tasksService.removeTask(taskId, this.list);
+      }
     });
-  }
 }
-
+}
