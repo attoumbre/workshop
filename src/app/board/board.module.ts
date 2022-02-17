@@ -6,6 +6,7 @@ import { BoardComponent } from './board/board.component';
 import { ListComponent } from './components/list/list.component';
 import { TaskComponent } from './components/task/task.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MaterialCdkModule } from '../material-cdk/material-cdk.module';
 
 
 
@@ -18,7 +19,8 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     CommonModule,
     BoardRoutingModule,
-    MatIconModule
+    MatIconModule,
+    MaterialCdkModule
 
 
   ]
