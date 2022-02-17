@@ -3,11 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { BoardRoutingModule } from './board-routing.module';
 import { BoardComponent } from './board/board.component';
+import { ListComponent } from './components/list/list.component';
+import { TaskComponent } from './components/task/task.component';
 
 
 @NgModule({
   declarations: [
-    BoardComponent
+    BoardComponent,
+    ListComponent,
+    TaskComponent
   ],
   imports: [
     CommonModule,
