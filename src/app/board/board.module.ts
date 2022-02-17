@@ -7,6 +7,8 @@ import { ListComponent } from './components/list/list.component';
 import { TaskComponent } from './components/task/task.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MaterialCdkModule } from '../material-cdk/material-cdk.module';
+import { CreateTaskComponent } from './components/create-task/create-task.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -14,13 +16,16 @@ import { MaterialCdkModule } from '../material-cdk/material-cdk.module';
   declarations: [
     BoardComponent,
     ListComponent,
-    TaskComponent
+    TaskComponent,
+    CreateTaskComponent
   ],
   imports: [
     CommonModule,
     BoardRoutingModule,
     MatIconModule,
-    MaterialCdkModule
+    MaterialCdkModule,
+    ReactiveFormsModule,
+    FormsModule
 
 
   ]
