@@ -9,10 +9,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-//CDK
+
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PortalModule } from '@angular/cdk/portal';
 
 const components = [
   MatToolbarModule, 
@@ -25,7 +27,9 @@ const components = [
   MatDatepickerModule,
   MatNativeDateModule,
   OverlayModule,
-  TextFieldModule
+  TextFieldModule,
+  MatDialogModule,
+  PortalModule
 ];
 
 

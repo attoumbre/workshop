@@ -21,10 +21,10 @@ type DropdownObject = {
 export class CreateTaskComponent implements OnInit {
   @ViewChild('autosize') autosize!: CdkTextareaAutosize;
   createTask!: FormGroup;
-  @Input()
-  connectedOverlay!: CdkConnectedOverlay;
+  @Input() connectedOverlay!: CdkConnectedOverlay;
   selectedPriority!: string;
-  
+  @Input() task?: TaskSchema;
+  formText: string ="";
   priorities: DropdownObject[] = [
     { value: 'urgent', viewValue: 'Urgente' },
     { value: 'moderate', viewValue: 'Moderado' },
@@ -33,6 +33,14 @@ export class CreateTaskComponent implements OnInit {
   constructor(private fb: FormBuilder, private _ngZone: NgZone) {}
   ngOnInit(): void {
     this.setForm();
+    this.selectedPriority = '';
+    if (this.task && this.task.id.length > 0) {
+      this.setValuesOnForm(this.task);
+      this.formText = 'Editar';
+      this.selectedPriority = this.task.priority;
+    } else {
+      this.formText = 'Crear';
+    }
   }
   
   setForm(): void {
@@ -43,11 +51,25 @@ export class CreateTaskComponent implements OnInit {
     });
   }
 
-  onFormAdd(form:TaskSchema): void {
+  setValuesOnForm(form: TaskSchema): void {
+    this.createTask.setValue({
+      date: new Date(form.date),
+      priority: form.priority,
+      description: form.description 
+   });
+  }
+
+
+  onFormAdd(form: TaskSchema): void {
     if (this.createTask.valid) {
       console.log('valid');
+      this.close();
+    } else {
+      console.log('editada');
+      this.close();
     }
   }
+
   triggerResize() {
     // Wait for changes to be applied, then trigger textarea resize.
     this._ngZone.onStable
@@ -59,3 +81,4 @@ export class CreateTaskComponent implements OnInit {
     this.connectedOverlay.overlayRef.detach();
   }
 }
+
