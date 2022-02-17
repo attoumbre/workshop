@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ListSchema } from 'src/app/models';
 
 @Component({
   selector: 'app-list',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
+  @Input() list!: ListSchema;
   constructor() { }
 
   ngOnInit(): void {

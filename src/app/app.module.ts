@@ -8,7 +8,8 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { BoardModule } from './board/board.module';
 import { HomeModule } from './home/home.module';
-
+import { HttpClientModule } from '@angular/common/http';
+export * from './models/index';
 @NgModule({
   declarations: [
     AppComponent
@@ -20,7 +21,8 @@ import { HomeModule } from './home/home.module';
     CoreModule,
     SharedModule,
     BoardModule,
-    HomeModule
+    HomeModule,
+    HttpClientModule
 
   ],
   providers: [],
