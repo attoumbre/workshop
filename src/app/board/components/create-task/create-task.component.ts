@@ -30,9 +30,9 @@ export class CreateTaskComponent implements OnInit {
   formText: string ="";
 
   priorities: DropdownObject[] = [
-    { value: 'urgent', viewValue: 'Urgente' },
-    { value: 'moderate', viewValue: 'Moderado' },
-    { value: 'low', viewValue: 'Bajo' },
+    { value: 'urgent', viewValue: 'Urgent' },
+    { value: 'moderate', viewValue: 'Modéré' },
+    { value: 'low', viewValue: 'lent' },
   ];
   constructor(
     private fb: FormBuilder,
@@ -46,10 +46,10 @@ export class CreateTaskComponent implements OnInit {
     this.selectedPriority = '';
    if (this.task && this.task.id && this.task.id.length > 0) {
       this.setValuesOnForm(this.task);
-      this.formText = 'Editar';
+      this.formText = 'Editer';
       this.selectedPriority = this.task.priority;
     } else {
-      this.formText = 'Crear';
+      this.formText = 'Creer';
     }
   }
   
@@ -88,7 +88,7 @@ export class CreateTaskComponent implements OnInit {
         this.tasksService.updateTask(form, this.listId);
       }
     }else {
-      console.log('editada');
+      console.log('édité');
       this.close();
     }
   }
