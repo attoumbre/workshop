@@ -1,13 +1,11 @@
 <main class="board" cdkDropListGroup>
-  <button
-    class="board__add"
-    cdkOverlayOrigin
-    (click)="displayOverlay()"
-    #trigger="cdkOverlayOrigin"
-    mat-raised-button
-    color="primary"
-  >
-    Añadir Tarea
+  <button class="board__add"
+          cdkOverlayOrigin
+          (click)="displayOverlay()"
+          #trigger="cdkOverlayOrigin"
+          mat-raised-button
+          color="primary">
+    Ajouter une tâche
   </button>
   <section class="board__list">
     <app-list *ngFor="let list of lists" [list]="list" (editTask)="displayOverlay($event)"></app-list>

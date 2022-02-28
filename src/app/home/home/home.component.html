@@ -1,13 +1,16 @@
 <main class="home">
     <h1 class="home__title">Kanban</h1>
     <p>
-      En nuestro día a día siempre tenemos que realizar diferentes tipos de tareas
-      y priorizarlas y dejarlas por escrito nos ayuda a abordarlas mucho más
-      rápido y lograr su realización
+      Dans notre travail quotidien, nous devons toujours
+      effectuer différents types de tâches.
+      Le fait de les classer par ordre de priorité
+      et de les noter nous aide à mieux les gérer,
+      à nous y attaquer beaucoup plus rapidement et
+      à les réaliser.
     </p>
-    <p>Por ello en este tablero te invitamos a organizar tu día a día</p>
+    <p>C'est pourquoi, dans ce tableau, nous vous invitons à organiser votre vie quotidienne.</p>
     <section class="home__task-list">
-      <h2 class="home__task-list__title">Lista de tareas</h2>
+      <h2 class="home__task-list__title">Liste des tâches</h2>
       <div class="home__task-list__buttons">
         <button
           class="option-button"
@@ -15,8 +18,9 @@
           mat-raised-button
           (click)="getPrioritiesTask('urgent')"
         >
-          <mat-icon aria-hidden="false" aria-label="urgent icon">alarm</mat-icon
-          >Urgentes
+          <mat-icon aria-hidden="false"
+                    aria-label="urgent icon">alarmant
+            </mat-icon> Urgentes
         </button>
         <button
           class="option-button"
@@ -24,9 +28,7 @@
           mat-raised-button
           (click)="getPrioritiesTask('moderate')"
         >
-          <mat-icon aria-hidden="false" aria-label="medium icon"
-            >autorenew</mat-icon
-          >Moderadas
+          <mat-icon aria-hidden="false" aria-label="medium icon">autorenouvellement</mat-icon>Modérées
         </button>
         <button
           class="option-button"
@@ -34,9 +36,7 @@
           mat-raised-button
           (click)="getPrioritiesTask('low')"
         >
-          <mat-icon aria-hidden="false" aria-label="medium icon"
-            >assignment_returned</mat-icon
-          >Bajas
+          <mat-icon aria-hidden="false" aria-label="medium icon">affectation_retournée</mat-icon>Pertes
         </button>
       </div>
       <div class="home__task-list__container">
@@ -54,25 +54,19 @@
                   aria-hidden="false"
                   aria-label="urgent icon"
                   *ngIf="task.priority === 'urgent'"
-                  >alarm</mat-icon
+                  >alarmant</mat-icon
                 >
-                <mat-icon
-                  aria-hidden="false"
-                  aria-label="medium icon"
-                  *ngIf="task.priority === 'moderate'"
-                  >autorenew</mat-icon
-                >
-                <mat-icon
-                  aria-hidden="false"
-                  aria-label="medium icon"
-                  *ngIf="task.priority === 'low'"
-                  >assignment_returned</mat-icon
-                >
-                <span>Tarea</span>
+                <mat-icon aria-hidden="false"
+                          aria-label="medium icon"
+                          *ngIf="task.priority === 'moderate'">autorenouvellement</mat-icon>
+                <mat-icon aria-hidden="false"
+                          aria-label="medium icon"
+                          *ngIf="task.priority === 'low'">autorenouvellement</mat-icon>
+                <span>Tâche</span>
               </div>
             </cdk-drop-list>
             <cdk-drop-list class="task__task-list__subtitle"
-              ><strong>Fecha de finalización:</strong>
+              ><strong>Date Limite:</strong>
               {{ task.date | date }}</cdk-drop-list
             >
           </mat-task-header>
@@ -83,10 +77,9 @@
           </cdk-drop-list>
         </cdk-drop-list>
         <div class="home__task-list__message" *ngIf="taskList?.length == 0">
-            <p class="text">No hay elementos para mostrar</p>
+          <p class="text">Aucun élément à afficher</p>
         </div>
       </div>
     </section>
   </main>
-  
   
