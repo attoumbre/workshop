@@ -19,7 +19,7 @@
           (click)="getPrioritiesTask('urgent')"
         >
           <mat-icon aria-hidden="false"
-                    aria-label="urgent icon">alarmant
+                    aria-label="urgent icon">alarm
             </mat-icon> Urgentes
         </button>
         <button
@@ -28,7 +28,7 @@
           mat-raised-button
           (click)="getPrioritiesTask('moderate')"
         >
-          <mat-icon aria-hidden="false" aria-label="medium icon">autorenouvellement</mat-icon>Modérées
+          <mat-icon aria-hidden="false" aria-label="medium icon">autorenew</mat-icon>Modérées
         </button>
         <button
           class="option-button"
@@ -36,7 +36,7 @@
           mat-raised-button
           (click)="getPrioritiesTask('low')"
         >
-          <mat-icon aria-hidden="false" aria-label="medium icon">affectation_retournée</mat-icon>Pertes
+          <mat-icon aria-hidden="false" aria-label="medium icon">assignment_returned</mat-icon>Annulé
         </button>
       </div>
       <div class="home__task-list__container">
@@ -54,14 +54,14 @@
                   aria-hidden="false"
                   aria-label="urgent icon"
                   *ngIf="task.priority === 'urgent'"
-                  >alarmant</mat-icon
+                  >alarm</mat-icon
                 >
                 <mat-icon aria-hidden="false"
                           aria-label="medium icon"
-                          *ngIf="task.priority === 'moderate'">autorenouvellement</mat-icon>
+                          *ngIf="task.priority === 'moderate'">autorenew</mat-icon>
                 <mat-icon aria-hidden="false"
                           aria-label="medium icon"
-                          *ngIf="task.priority === 'low'">autorenouvellement</mat-icon>
+                          *ngIf="task.priority === 'low'">autorenew</mat-icon>
                 <span>Tâche</span>
               </div>
             </cdk-drop-list>
