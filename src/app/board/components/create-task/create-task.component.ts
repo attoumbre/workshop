@@ -77,7 +77,7 @@ export class CreateTaskComponent implements OnInit {
     
       console.log('valid', form.id);
       this.close();
-    } else if (this.task && this.task.id){
+    } else if (this.task && this.listId){
       const findPriority = this.priorities.find(
         (element) => form.priority === element.value
       );
@@ -86,7 +86,7 @@ export class CreateTaskComponent implements OnInit {
       form.date = new Date(form.date);
       console.log("priority", form.priority)
       if (form.priority) {
-        this.tasksService.updateTask(form, this.task.id);
+        this.tasksService.updateTask(form, this.listId);
         this.close();
       }
     }else {

@@ -13,10 +13,10 @@
   <p class="task__date"><strong>Date limite:</strong> {{ task.date | date }} </p>
   
   <p class="task__description">{{task.description}}</p>
-  <button  matTooltip="Editar tarea" matTooltipClass="custom-tooltip-blue" matTooltipPosition="above" mat-icon-button (click)="handleEditTask(task)">
+  <button  matTooltip="Editer tache" matTooltipClass="custom-tooltip-blue" matTooltipPosition="above" mat-icon-button (click)="handleEditTask(task)">
     <mat-icon aria-label="icon-button to edit">edit</mat-icon>
   </button>
-  <button  matTooltip="Eliminar tarea" matTooltipPosition="above" mat-icon-button (click)="removeTask(task.id)">
+  <button  matTooltip="Supprimer tache" matTooltipPosition="above" mat-icon-button (click)="removeTask(task.id)">
     <mat-icon aria-label="icon-button to remove">delete</mat-icon>
   </button>
 </div>
