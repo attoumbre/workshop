@@ -75,20 +75,22 @@ export class CreateTaskComponent implements OnInit {
       form.id = generateUniqueId();
       this.tasksService.addTask(form);
     
-      console.log('valid');
+      console.log('valid', form.id);
       this.close();
-    } else if (this.task && this.listId){
+    } else if (this.task && this.task.id){
       const findPriority = this.priorities.find(
         (element) => form.priority === element.value
       );
       form.id = this.task.id;
       form.priority = !findPriority ? this.task.priority : form.priority;
       form.date = new Date(form.date);
+      console.log("priority", form.priority)
       if (form.priority) {
-        this.tasksService.updateTask(form, this.listId);
+        this.tasksService.updateTask(form, this.task.id);
+        this.close();
       }
     }else {
-      console.log('édité');
+      console.log('édité',  this.listId );
       this.close();
     }
   }

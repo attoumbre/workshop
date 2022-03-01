@@ -19,7 +19,7 @@ const initialValue = {
 export class BoardComponent implements OnInit {
   lists: ListSchema[];
   task: TaskSchema;
-  listId!: string;
+  listId?: string;
 
   isOverlayDisplayed = false;
   constructor(private apiService: ApiService, private taskService: TaskService) {

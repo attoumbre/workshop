@@ -47,6 +47,7 @@ export class TaskService {
 
   /* Edit card on list */
   updateTask(data: TaskSchema, listId: string | any): void {
+    listId="1"
     if (data) {
       const elementsIndex = this.list.findIndex(
         (element) => element.id === listId
