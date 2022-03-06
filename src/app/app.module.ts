@@ -10,7 +10,7 @@ import { BoardModule } from './board/board.module';
 import { HomeModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
 import {MatIconModule} from '@angular/material/icon';
-
+import { authInterceptorProviders } from './_helpers/auth.interceptor';
 
 export * from './models/index';
 @NgModule({
@@ -31,7 +31,7 @@ export * from './models/index';
     
 
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
