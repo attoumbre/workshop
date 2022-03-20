@@ -29,20 +29,20 @@
               <input 
               matInput 
               placeholder="Username"
-              name="username"
+              name="nom"
               
               minlength="3"
               maxlength="20"
-              [(ngModel)]="form.username"
+              [(ngModel)]="form.nom"
               required
-              #username="ngModel"
+              #nom="ngModel"
               >
-              <div class="alert-danger" *ngIf="username.errors && f.submitted">
-                <div *ngIf="username.errors['required']">Username is required</div>
-                <div *ngIf="username.errors['minlength']">
+              <div class="alert-danger" *ngIf="nom.errors && f.submitted">
+                <div *ngIf="nom.errors['required']">nom is required</div>
+                <div *ngIf="nom.errors['minlength']">
                   Username must be at least 3 characters
                 </div>
-                <div *ngIf="username.errors['maxlength']">
+                <div *ngIf="nom.errors['maxlength']">
                   Username must be at most 20 characters
                 </div>
               </div>
@@ -52,20 +52,20 @@
               <input 
               matInput 
               placeholder="Userforename"
-              name="userforename"
+              name="prenom"
               minlength="3"
               maxlength="20"
              
-              [(ngModel)]="form.userforename"
+              [(ngModel)]="form.prenom"
               required
-              #userforename="ngModel"
+              #prenom="ngModel"
               >
-              <div class="alert-danger" *ngIf="userforename.errors && f.submitted">
-                <div *ngIf="userforename.errors['required']">Userforename is required</div>
-                <div *ngIf="userforename.errors['minlength']">
+              <div class="alert-danger" *ngIf="prenom.errors && f.submitted">
+                <div *ngIf="prenom.errors['required']">prenom is required</div>
+                <div *ngIf="prenom.errors['minlength']">
                   Userforename must be at least 3 characters
                 </div>
-                <div *ngIf="userforename.errors['maxlength']">
+                <div *ngIf="prenom.errors['maxlength']">
                   Userforename must be at most 20 characters
                 </div>
               </div>

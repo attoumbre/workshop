@@ -10,24 +10,35 @@ import { TokenStorageService } from '../_services/token-storage.service';
 export class SigninComponent implements OnInit {
 
   form: any = {
-    username: null,
-    password: null
+    nom: null,
+    email: null
   };
+  /**nom='';
+  email='';*/
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
   ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
-    }
+   // if (this.tokenStorage.getToken()) {
+    //  this.isLoggedIn = true;
+     // this.roles = this.tokenStorage.getUser().roles;
+   // }
   }
-  onSubmit(): void {
-    const { username, password } = this.form;
-    this.authService.login(username, password).subscribe(
-      data => {
+  onSubmit(){
+    const { nom, email } = this.form;
+    this.authService.login(nom, email).subscribe(result=>
+      {
+        this.isLoggedIn = true;
+        //this.tokenStorage.saveToken(result.accessToken);
+        this.tokenStorage.saveUser(result);
+        //this.reloadPage();
+      },error=>{
+        this.errorMessage = error.error.message;
+        this.isLoginFailed = true;
+      })
+     /** data => {
         //this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
         this.isLoginFailed = false;
@@ -39,7 +50,7 @@ export class SigninComponent implements OnInit {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
       }
-    );
+    ); */
   }
   reloadPage(): void {
     window.location.reload();

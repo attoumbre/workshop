@@ -26,15 +26,15 @@
         <mat-card-content>
             <mat-form-field class="example-full-width">
             <input matInput 
-            placeholder="Username"
-            name="username"
-            [(ngModel)]="form.username"
+            placeholder="Nom"
+            name="nom"
+            [(ngModel)]="form.nom"
             required
-            #username="ngModel">
+            #nom="ngModel">
             <div
             class="alert alert-danger"
             role="alert"
-            *ngIf="username.errors && f.submitted"
+            *ngIf="nom.errors && f.submitted"
             >
                 Username is required!
            </div>
