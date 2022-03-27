@@ -1,9 +1,12 @@
+import { state } from '@angular/animations';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/core/core.module';
 import { TaskService } from 'src/app/core/services/task.service';
 
 import { ListSchema, TaskSchema } from 'src/app/models';
+import { LoginService } from 'src/app/_services/login.service';
 
 const initialValue = {
   id: '',
@@ -21,8 +24,11 @@ export class BoardComponent implements OnInit {
   task: TaskSchema;
   listId?: string;
 
+  loginSubscription : Subscription = new Subscription;
+  isLoggedIn = false;
+
   isOverlayDisplayed = false;
-  constructor(private apiService: ApiService, private taskService: TaskService) {
+  constructor(private apiService: ApiService, private taskService: TaskService, private loginService : LoginService) {
     this.lists = [];
     this.task = initialValue;
   }
@@ -30,7 +36,9 @@ export class BoardComponent implements OnInit {
   
   ngOnInit(): void {
     //this.getDataList();
+    this.loginService.currentState.subscribe(state => this.isLoggedIn = state);
     this.getDataStored();
+    
   }
   readonly overlayOptions: Partial<CdkConnectedOverlay> = {
     hasBackdrop: true,

@@ -12,15 +12,15 @@
             <span> Home</span>
           </a>
         </li>
-        <li>
+        <li *ngIf="!isLoggedIn">
           <button mat-icon-button class="toolbar__menu__icon favorite-icon" aria-label="account option">
             <mat-icon>person</mat-icon>
           </button>
-          <a href="#" routerLink="/signin" routerLinkActive="active" class="toolbar__menu__text">
+          <a href="#" routerLink="/signin" routerLinkActive="active" class="toolbar__menu__text" >
             <span> Connect</span>
           </a>
         </li>
-        <li *ngIf=" isLoggedIn">
+        <li *ngIf="isLoggedIn">
           <button mat-icon-button class="toolbar__menu__icon" aria-label="Board option">
             <mat-icon>note</mat-icon>
           </button>

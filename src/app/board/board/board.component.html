@@ -1,4 +1,4 @@
-<main class="board" cdkDropListGroup>
+<main class="board" cdkDropListGroup *ngIf="isLoggedIn">
   <button class="board__add"
           cdkOverlayOrigin
           (click)="displayOverlay()"

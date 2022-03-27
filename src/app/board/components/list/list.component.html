@@ -1,6 +1,7 @@
 <div
 	class="list"
-	id="list_{{list.id}}" 
+	*ngIf="isLoggedIn"
+	id="list_{{list.id}}"  
 	cdkDropList
 	[cdkDropListData]="list.tasks"
 	(cdkDropListDropped)="drop($event)"
@@ -10,4 +11,4 @@
 		<app-task *ngFor="let task of list.tasks" [task]="task" [list]="list" (editTask)="handleEdit(task)" cdkDrag></app-task>
 	</div>
 	
-</div>
+</div>  

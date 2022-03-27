@@ -30,10 +30,14 @@ export class AuthService {
       this.http.post(`api/user/signin`, userDto,httpOptions).subscribe(result =>{
         observer.next(true);
         observer.complete();
+        //isloggedin prend la valeur 1 lorsque la connexion réuissie
+        localStorage.setItem("isLoggedIn","1");
         //console.log(result)
       }, error =>{
         observer.error(false);
         observer.complete();
+        //isloggedin prend la valeur o lorsque la connexion échoue
+        localStorage.setItem("isLoggedIn","0");
         console.log(error)
       });
    } );

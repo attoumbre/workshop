@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ListSchema, TaskSchema } from 'src/app/models';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { TaskService } from 'src/app/core/services/task.service';
+import { LoginService } from 'src/app/_services/login.service';
 
 
 @Component({
@@ -13,7 +14,8 @@ export class ListComponent implements OnInit {
 
   @Input() list!: ListSchema;
   @Output() editTask: EventEmitter<TaskSchema> = new EventEmitter();
-  constructor(public tasksService: TaskService) {}
+  isLoggedIn = false;
+  constructor(public tasksService: TaskService, private loginService : LoginService) {}
 
   drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
@@ -27,6 +29,8 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loginService.currentState.subscribe(state => this.isLoggedIn = state);
+    
   }
 
   handleEdit(task: TaskSchema){

@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../_services/auth.service';
+import { LoginService } from '../_services/login.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
@@ -13,13 +16,19 @@ export class SigninComponent implements OnInit {
     nom: null,
     email: null
   };
+
+  loginSubscription: Subscription = new Subscription;
+  
   /**nom='';
   email='';*/
-  isLoggedIn = false;
+  //isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+
+  isLoggedIn = false;
+  
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private loginService : LoginService,private _router: Router) { }
   ngOnInit(): void {
    // if (this.tokenStorage.getToken()) {
     //  this.isLoggedIn = true;
@@ -31,14 +40,17 @@ export class SigninComponent implements OnInit {
     this.authService.login(nom, email).subscribe(result=>
       {
         this.isLoggedIn = true;
+        this.loginService.changeMessage(true);
+        this._router.navigateByUrl('/board');
         //this.tokenStorage.saveToken(result.accessToken);
-        this.tokenStorage.saveUser(result);
+        //this.tokenStorage.saveUser(result);
         //this.reloadPage();
       },error=>{
         this.errorMessage = error.error.message;
+        this.loginService.changeMessage(false);
         this.isLoginFailed = true;
       })
-     /** data => {
+     /** data => { 
         //this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
         this.isLoginFailed = false;

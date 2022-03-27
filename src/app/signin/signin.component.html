@@ -1,4 +1,4 @@
-<div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
+<div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center" *ngIf="!isLoggedIn">
     <mat-card class="box">
         <mat-card-header>
         <mat-card-title>
@@ -17,7 +17,6 @@
 
         <form 
         class="example-form"
-        *ngIf="!isLoggedIn"
         name="form"
         (ngSubmit)="f.form.valid && onSubmit()"
         #f="ngForm"
@@ -60,7 +59,7 @@
             </div>
             </mat-form-field>
         </mat-card-content>
-        <button mat-stroked-button color="accent" class="btn-block">Sign-in</button>
+        <button mat-stroked-button color="accent" class="btn-block" >Sign-in</button>
         <div
           class="alert alert-danger"
           role="alert"
