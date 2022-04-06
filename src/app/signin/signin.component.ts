@@ -41,6 +41,7 @@ export class SigninComponent implements OnInit {
       {
         this.isLoggedIn = true;
         this.loginService.changeMessage(true);
+        //console.log(localStorage.getItem('user'));
         this._router.navigateByUrl('/board');
         //this.tokenStorage.saveToken(result.accessToken);
         //this.tokenStorage.saveUser(result);

@@ -22,6 +22,7 @@ export class AuthService {
   login(uName: string, uMail: string) {
    
     const userDto = {
+    
       nom: uName,
       email : uMail
     }
@@ -31,6 +32,7 @@ export class AuthService {
         observer.next(true);
         observer.complete();
         //isloggedin prend la valeur 1 lorsque la connexion réuissie
+        localStorage.setItem("user",JSON.stringify(result))
         localStorage.setItem("isLoggedIn","1");
         //console.log(result)
       }, error =>{
@@ -51,7 +53,7 @@ export class AuthService {
       email : uMail
     }
     return new Observable<boolean> ( (observer)=>{
-      this.http.post(`${environment.AUTH_API}/user/signup`, registerData,httpOptions).subscribe(result =>{
+      this.http.post(`api/user/signup`, registerData,httpOptions).subscribe(result =>{
         observer.next(true);
         observer.complete();
       }, error =>{
