@@ -1,4 +1,4 @@
-<main class="home">
+<main class="home" cdkDropListGroup>
     <h1 class="home__title">Kanban</h1>
     <p>
       Dans notre travail quotidien, nous devons toujours
@@ -8,7 +8,31 @@
       à nous y attaquer beaucoup plus rapidement et
       à les réaliser.
     </p>
+
     <p>C'est pourquoi, dans ce tableau, nous vous invitons à organiser votre vie quotidienne.</p>
+    <div> <button class="board__add"
+      cdkOverlayOrigin
+      (click)="onCreate()"
+      #trigger="cdkOverlayOrigin"
+      mat-raised-button
+      color="primary">
+Creer tableau
+</button>
+
+</div>
+<ng-template
+#connectedOverlay="cdkConnectedOverlay"
+cdkConnectedOverlay
+[cdkConnectedOverlayOrigin]="trigger"
+[cdkConnectedOverlayOpen]="isOverlayDisplayed"
+[cdkConnectedOverlayHasBackdrop]="overlayOptions.hasBackdrop"
+[cdkConnectedOverlayPosition]="overlayOptions.positions"
+(backdropClick)="hideOverlay()"
+(detach)="hideOverlay()"
+>
+
+<app-create-board [connectedOverlay]="connectedOverlay" ></app-create-board>
+</ng-template>
     <section class="home__task-list">
       <h2 class="home__task-list__title">Liste des tâches</h2>
       <div class="home__task-list__buttons">
@@ -81,5 +105,6 @@
         </div>
       </div>
     </section>
+   
   </main>
   
