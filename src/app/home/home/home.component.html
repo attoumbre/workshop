@@ -10,29 +10,31 @@
     </p>
 
     <p>C'est pourquoi, dans ce tableau, nous vous invitons à organiser votre vie quotidienne.</p>
-    <div> <button class="board__add"
+    
+    <div *ngIf="isLoggedIn"> 
+      <button class="board__add"
       cdkOverlayOrigin
       (click)="onCreate()"
       #trigger="cdkOverlayOrigin"
       mat-raised-button
       color="primary">
-Creer tableau
-</button>
+      Creer tableau
+      </button>
+      <ng-template
+      #connectedOverlay="cdkConnectedOverlay"
+      cdkConnectedOverlay
+      [cdkConnectedOverlayOrigin]="trigger"
+      [cdkConnectedOverlayOpen]="isOverlayDisplayed"
+      [cdkConnectedOverlayHasBackdrop]="overlayOptions.hasBackdrop"
+      [cdkConnectedOverlayPosition]="overlayOptions.positions"
+      (backdropClick)="hideOverlay()"
+      (detach)="hideOverlay()"
+      >
 
-</div>
-<ng-template
-#connectedOverlay="cdkConnectedOverlay"
-cdkConnectedOverlay
-[cdkConnectedOverlayOrigin]="trigger"
-[cdkConnectedOverlayOpen]="isOverlayDisplayed"
-[cdkConnectedOverlayHasBackdrop]="overlayOptions.hasBackdrop"
-[cdkConnectedOverlayPosition]="overlayOptions.positions"
-(backdropClick)="hideOverlay()"
-(detach)="hideOverlay()"
->
+      <app-create-board [connectedOverlay]="connectedOverlay" ></app-create-board>
+      </ng-template>
+    </div>
 
-<app-create-board [connectedOverlay]="connectedOverlay" ></app-create-board>
-</ng-template>
     <section class="home__task-list">
       <h2 class="home__task-list__title">Liste des tâches</h2>
       <div class="home__task-list__buttons">

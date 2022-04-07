@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/core/core.module';
 import { TaskService } from 'src/app/core/services/task.service';
 import { ListSchema, TaskSchema } from 'src/app/models';
+import { LoginService } from 'src/app/_services/login.service';
 
 const initialValue = {
   id: '',
@@ -20,12 +21,13 @@ export class HomeComponent implements OnInit {
   lists!: ListSchema[];
   task!: TaskSchema;
   listId?: string;
+  isLoggedIn = false
   isOverlayDisplayed = false;
-  constructor(private apiService: ApiService, private taskService: TaskService) {}
+  constructor(private apiService: ApiService, private taskService: TaskService ,private loginService : LoginService) {}
 
 
   ngOnInit(): void {
-   
+    this.loginService.currentState.subscribe(state => this.isLoggedIn = state);
   }
   
   getPrioritiesTask(PriorityType: string): void {
