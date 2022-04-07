@@ -85,10 +85,7 @@ export class HomeComponent implements OnInit {
         } else {
           this.task = initialValue;
         }
-    
-        if(event.listId){
-          this.listId = event.listId;
-        }
+  
       }
     
 }

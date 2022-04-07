@@ -28,7 +28,7 @@ export class SigninComponent implements OnInit {
 
   isLoggedIn = false;
   
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private loginService : LoginService,private _router: Router) { }
+  constructor(private authService: AuthService, private loginService : LoginService,private _router: Router) { }
   ngOnInit(): void {
    // if (this.tokenStorage.getToken()) {
     //  this.isLoggedIn = true;

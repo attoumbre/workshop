@@ -6,10 +6,8 @@ import { take } from 'rxjs/operators';
 import { TaskService } from 'src/app/core/services/task.service';
 import { TaskSchema } from 'src/app/models';
 import { generateUniqueId } from 'src/app/utils';
-type DropdownObject = {
-  value: string;
-  viewValue: string;
-};
+import { BoardService } from 'src/app/_services/board.service';
+
 @Component({
   selector: 'app-create-board',
   templateUrl: './create-board.component.html',
@@ -23,11 +21,13 @@ export class CreateBoardComponent implements OnInit {
   //@Input() task?: TaskSchema;
   //@Input() listId?: string;
   formText: string ="";
-
+ 
+  nom: any;
+  
  
   constructor(
     private fb: FormBuilder,
-  
+    private boardService : BoardService
    
   ) {}
 
@@ -41,20 +41,27 @@ export class CreateBoardComponent implements OnInit {
   setForm(): void {
     this.createBoard = this.fb.group({
      
-      description : [ '' ]
+      nom : [ '' ]
     });
   }
 
-  setValuesOnForm(form: TaskSchema): void {
+  setValuesOnForm(form: any): void {
     this.createBoard.setValue({
     
-      description: form.description 
+      nom: form.nom 
    });
   }
 
 
-  onFormAdd(form: TaskSchema): void {
-   
+  onFormAdd(form: any): void {
+    this.boardService.createBoard(form.nom).subscribe(result=>
+      {
+        console.log(result)
+      },error=>{
+        console.log(error)
+      })
+    
+ 
   }
 
   /**triggerResize() {
