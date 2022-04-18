@@ -7,6 +7,7 @@ import { TaskService } from 'src/app/core/services/task.service';
 import { TaskSchema } from 'src/app/models';
 import { generateUniqueId } from 'src/app/utils';
 import { BoardService } from 'src/app/_services/board.service';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 @Component({
   selector: 'app-create-board',
@@ -27,7 +28,8 @@ export class CreateBoardComponent implements OnInit {
  
   constructor(
     private fb: FormBuilder,
-    private boardService : BoardService
+    private boardService : BoardService,
+    private token : TokenStorageService
    
   ) {}
 
@@ -54,7 +56,7 @@ export class CreateBoardComponent implements OnInit {
 
 
   onFormAdd(form: any): void {
-    this.boardService.createBoard(form.nom).subscribe(result=>
+    this.boardService.createBoard(form.nom,this.token.getUser().id).subscribe(result=>
       {
         console.log(result)
       },error=>{

@@ -17,15 +17,17 @@ export class BoardService {
 
   constructor(private http: HttpClient) { }
 
-  createBoard(bName: string){
+  createBoard(bName: string,  u_id: any){
     const data = {
-      nom: bName 
+      nom: bName ,
+      userT_id: u_id
     }
-    console.log(data)
+    //console.log(data)
     return new Observable<boolean> ( (observer)=>{
       this.http.post(`api/tableau/create`, data,httpOptions).subscribe(result =>{
         observer.next(true);
         observer.complete();
+        console.log("bon result",result)
       }, error =>{
         observer.error(false);
         observer.complete();

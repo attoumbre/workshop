@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subscriber } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { TokenStorageService } from './token-storage.service';
 
 
 const httpOptions = {
@@ -18,7 +19,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private token : TokenStorageService) { }
   login(uName: string, uMail: string) {
    
     const userDto = {
@@ -32,9 +33,10 @@ export class AuthService {
         observer.next(true);
         observer.complete();
         //isloggedin prend la valeur 1 lorsque la connexion réuissie
-        localStorage.setItem("user",JSON.stringify(result))
+        this.token.setUser(result)
+        
         localStorage.setItem("isLoggedIn","1");
-        //console.log(result)
+        //console.log("le bon",result)
       }, error =>{
         observer.error(false);
         observer.complete();

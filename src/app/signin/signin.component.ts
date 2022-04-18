@@ -16,7 +16,11 @@ export class SigninComponent implements OnInit {
     nom: null,
     email: null
   };
-
+  user :  any ={
+    id: null,
+    nom: null,
+    email: null
+  }
   loginSubscription: Subscription = new Subscription;
   
   /**nom='';
@@ -25,10 +29,10 @@ export class SigninComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
-
   isLoggedIn = false;
-  
-  constructor(private authService: AuthService, private loginService : LoginService,private _router: Router) { }
+  usert : any;
+  constructor(private authService: AuthService, private loginService : LoginService,private _router: Router,
+    private token : TokenStorageService) { }
   ngOnInit(): void {
    // if (this.tokenStorage.getToken()) {
     //  this.isLoggedIn = true;
@@ -41,7 +45,9 @@ export class SigninComponent implements OnInit {
       {
         this.isLoggedIn = true;
         this.loginService.changeMessage(true);
-        //console.log(localStorage.getItem('user'));
+        this.usert =this.token.getUser()
+        console.log(this.usert.id);
+        console.log(result)
         this._router.navigateByUrl('/home');
         //this.tokenStorage.saveToken(result.accessToken);
         //this.tokenStorage.saveUser(result);
