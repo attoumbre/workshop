@@ -6,7 +6,9 @@ import { ApiService } from 'src/app/core/core.module';
 import { TaskService } from 'src/app/core/services/task.service';
 
 import { ListSchema, TaskSchema } from 'src/app/models';
+import { BoardService } from 'src/app/_services/board.service';
 import { LoginService } from 'src/app/_services/login.service';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 const initialValue = {
   id: '',
@@ -26,9 +28,14 @@ export class BoardComponent implements OnInit {
 
   loginSubscription : Subscription = new Subscription;
   isLoggedIn = false;
-
+  isLog = false;
+  hadTable= false
   isOverlayDisplayed = false;
-  constructor(private apiService: ApiService, private taskService: TaskService, private loginService : LoginService) {
+  constructor(private apiService: ApiService, 
+    private taskService: TaskService, 
+    private loginService : LoginService,
+    private board : BoardService,
+    private token: TokenStorageService) {
     this.lists = [];
     this.task = initialValue;
   }
@@ -38,6 +45,9 @@ export class BoardComponent implements OnInit {
     //this.getDataList();
     this.loginService.currentState.subscribe(state => this.isLoggedIn = state);
     this.getDataStored();
+    this.board.getUserBoard(this.token.getUser().id).subscribe(res=>
+      this.hadTable = res
+      );
     
   }
   readonly overlayOptions: Partial<CdkConnectedOverlay> = {

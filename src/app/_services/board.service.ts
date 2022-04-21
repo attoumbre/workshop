@@ -1,4 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 const httpOptions = {
@@ -20,11 +21,35 @@ export class BoardService {
   createBoard(bName: string,  u_id: any){
     const data = {
       nom: bName ,
-      userT_id: u_id
+      userT:{
+        id: u_id
+    }  
     }
+
     //console.log(data)
     return new Observable<boolean> ( (observer)=>{
       this.http.post(`api/tableau/create`, data,httpOptions).subscribe(result =>{
+        console.log(result)
+        observer.next(true);
+        observer.complete();
+        console.log("bon result",result)
+      }, error =>{
+        observer.error(false);
+        observer.complete();
+      });
+
+    } );
+  }
+
+  getUserBoard(id: number){
+    const data = {
+      idUser: id
+    }
+
+    return new Observable<boolean> ( (observer)=>{
+      
+      this.http.post(`api/tableau/perso`, data,httpOptions).subscribe(result =>{
+        console.log(result)
         observer.next(true);
         observer.complete();
         console.log("bon result",result)
