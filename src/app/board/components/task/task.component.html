@@ -10,8 +10,8 @@
     <mat-icon aria-hidden="false" aria-label="medium icon" *ngIf="task.priority === 'low'">assignment_returned</mat-icon>
   </div>
   <h3 class="task__title">Tâche</h3>
-  <p class="task__date"><strong>Date limite:</strong> {{ task.date | date }} </p>
-  
+  <!--<p class="task__date"><strong>Date limite:</strong> {{ task.date | date }} </p>-->
+  <p class="task__description">{{task.description}}</p>
   <p class="task__description">{{task.description}}</p>
   <button  matTooltip="Editer tache" matTooltipClass="custom-tooltip-blue" matTooltipPosition="above" mat-icon-button (click)="handleEditTask(task)">
     <mat-icon aria-label="icon-button to edit">edit</mat-icon>
