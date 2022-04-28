@@ -33,7 +33,36 @@
       <app-create-board [connectedOverlay]="connectedOverlay" ></app-create-board>
       </ng-template>
     </div>
+    <div
+	class="list"
+	*ngIf="isLoggedIn&&hadTable"
+	
+	cdkDropList
 
+  >
+    <h3 class="list__title"><strong>liste des tableaux</strong></h3>
+    <div class="list__tasks">
+      
+        <div *ngFor="let item of listBoard">
+          <div class="home__task-list__buttons">
+            <button
+              class="option-button"
+              mat-button
+              mat-raised-button
+              (click)="getTable()"
+            >
+              <mat-icon aria-hidden="false"
+                        aria-label="urgent icon">note
+                </mat-icon> {{ item.nom }}
+            </button>
+           
+          </div>
+           
+        </div>
+    
+	</div>
+	
+</div>  
     <section class="home__task-list">
       <h2 class="home__task-list__title">Liste des tâches</h2>
       <div class="home__task-list__buttons">

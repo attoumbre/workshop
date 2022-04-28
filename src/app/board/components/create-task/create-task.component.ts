@@ -58,6 +58,7 @@ export class CreateTaskComponent implements OnInit {
       date : [''],
       priority: [''],
       description : [ '' ]
+      //temps : ['']
     });
   }
 

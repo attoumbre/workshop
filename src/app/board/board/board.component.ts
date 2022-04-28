@@ -45,7 +45,7 @@ export class BoardComponent implements OnInit {
     //this.getDataList();
     this.loginService.currentState.subscribe(state => this.isLoggedIn = state);
     this.getDataStored();
-    this.board.getUserBoard(this.token.getUser().id).subscribe(res=>
+    this.board.checkUserBoard(this.token.getUser().id).subscribe(res=>
       this.hadTable = res
       );
     

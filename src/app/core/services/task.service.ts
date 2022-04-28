@@ -24,6 +24,18 @@ export class TaskService {
         this.boardList.next(response['list']);
       }
     });
+
+    /*return new Observable<boolean>((observer)=>{
+      this.http.get(`api/user/signup`).subscribe(result=>{
+        observer.next(true);
+        observer.complete();
+
+      }, error=>{
+        observer.next(false);
+        observer.complete();
+      } );
+       
+    });*/
   }
 
   /* getter list of Board */

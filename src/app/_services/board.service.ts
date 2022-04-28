@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 const httpOptions = {
   headers: new HttpHeaders({ 
     
@@ -15,7 +15,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class BoardService {
-
+  private boardList: any[] = [];
   constructor(private http: HttpClient) { }
 
   createBoard(bName: string,  u_id: any){
@@ -29,9 +29,11 @@ export class BoardService {
     //console.log(data)
     return new Observable<boolean> ( (observer)=>{
       this.http.post(`api/tableau/create`, data,httpOptions).subscribe(result =>{
-        console.log(result)
+        
         observer.next(true);
+        
         observer.complete();
+        
         console.log("bon result",result)
       }, error =>{
         observer.error(false);
@@ -41,18 +43,41 @@ export class BoardService {
     } );
   }
 
-  getUserBoard(id: number){
+  getlist(): any[] {
+    return this.boardList;
+  }
+  checkUserBoard(id: number){
     const data = {
       idUser: id
     }
 
     return new Observable<boolean> ( (observer)=>{
       
-      this.http.post(`api/tableau/perso`, data,httpOptions).subscribe(result =>{
-        console.log(result)
+      this.http.post(`api/tableau/perso`, data,httpOptions).subscribe((result : any) =>{
+        
         observer.next(true);
         observer.complete();
-        console.log("bon result",result)
+        if(this.boardList != []){
+          if(this.boardList.length < result.length){
+            for (const index in result) {
+              let inData = false;
+              for( const item in this.boardList){
+                if(this.boardList[item] ==  result[index]){
+                  inData = true
+                }
+              }
+              if(!inData){
+                this.boardList.push(result[index])
+              } 
+            }
+          }
+        }else{
+          for (const id in result){
+            this.boardList.push(result[id])
+          }
+        }
+        
+        //console.log("bon result",result)
       }, error =>{
         observer.error(false);
         observer.complete();

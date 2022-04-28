@@ -2,6 +2,7 @@ import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { TaskService } from 'src/app/core/services/task.service';
 import { TaskSchema } from 'src/app/models';
@@ -15,7 +16,7 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
   styleUrls: ['./create-board.component.scss']
 })
 export class CreateBoardComponent implements OnInit {
-  //@ViewChild('autosize') autosize!: CdkTextareaAutosize;
+  @ViewChild('autosize') autosize!: CdkTextareaAutosize;
   createBoard!: FormGroup;
   @Input() connectedOverlay!: CdkConnectedOverlay;
   //selectedPriority!: string;
@@ -29,7 +30,9 @@ export class CreateBoardComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private boardService : BoardService,
-    private token : TokenStorageService
+    private token : TokenStorageService,
+    private _router : Router,
+    private _ngZone: NgZone,
    
   ) {}
 
@@ -59,6 +62,11 @@ export class CreateBoardComponent implements OnInit {
     this.boardService.createBoard(form.nom,this.token.getUser().id).subscribe(result=>
       {
         console.log(result)
+      
+        this.close();
+        // gerer apres
+        window.location.reload();
+        
       },error=>{
         console.log(error)
       })
@@ -66,12 +74,12 @@ export class CreateBoardComponent implements OnInit {
  
   }
 
-  /**triggerResize() {
+  triggerResize() {
     // Wait for changes to be applied, then trigger textarea resize.
     this._ngZone.onStable
       .pipe(take(1))
       .subscribe(() => this.autosize.resizeToFitContent(true));
-  }*/
+  }
 
   close(): void {
     this.connectedOverlay.overlayRef.detach();

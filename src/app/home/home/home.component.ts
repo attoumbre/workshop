@@ -1,5 +1,6 @@
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/core/core.module';
 import { TaskService } from 'src/app/core/services/task.service';
 import { ListSchema, TaskSchema } from 'src/app/models';
@@ -23,18 +24,34 @@ export class HomeComponent implements OnInit {
   lists!: ListSchema[];
   task!: TaskSchema;
   listId?: string;
+  listBoard : any[]=[]
+  hadTable = false
   isLoggedIn = false
   isOverlayDisplayed = false;
   constructor(private apiService: ApiService, 
     private taskService: TaskService ,
     private loginService : LoginService,
     private board: BoardService,
-    private token : TokenStorageService
+    private token : TokenStorageService,
+    private _router : Router
     ) {}
 
 
   ngOnInit(): void {
     this.loginService.currentState.subscribe(state => this.isLoggedIn = state);
+    
+    if (this.isLoggedIn){
+      this.board.checkUserBoard(this.token.getUser().id).subscribe(res=>
+        this.hadTable = res
+        );
+        
+        this.listBoard = this.board.getlist();
+        console.log("lt",this.board.getlist())
+    
+      
+    }
+    
+    
   }
   
   getPrioritiesTask(PriorityType: string): void {
@@ -95,6 +112,10 @@ export class HomeComponent implements OnInit {
           this.task = initialValue;
         }
   
+      }
+
+      getTable(){
+        this._router.navigateByUrl('/board');
       }
     
 }
