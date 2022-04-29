@@ -6,6 +6,7 @@ import { TaskService } from 'src/app/core/services/task.service';
 import { ListSchema, TaskSchema } from 'src/app/models';
 import { BoardService } from 'src/app/_services/board.service';
 import { LoginService } from 'src/app/_services/login.service';
+import { SectionService } from 'src/app/_services/section.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 const initialValue = {
@@ -34,7 +35,8 @@ export class HomeComponent implements OnInit {
     private loginService : LoginService,
     private board: BoardService,
     private token : TokenStorageService,
-    private _router : Router
+    private _router : Router, 
+    private section : SectionService
     ) {}
 
 
@@ -115,16 +117,17 @@ export class HomeComponent implements OnInit {
         }
   
       }
-
       getTable(id:number){
         console.log(id)
         this._router.navigateByUrl('/board');
       }
       deleteTable(id: number){
-        console.log(id)
+        
+        //this.section.deleteSection(id).subscribe(res=>{console.log(res)
+        //});
         this.board.deleteBoard(id).subscribe((res: any)=>
-          console.log(res)
-          );
+        console.log(res)
+        );
         //apres supression reload la page
         //this.reLoard()
       }

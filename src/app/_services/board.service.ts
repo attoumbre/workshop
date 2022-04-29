@@ -43,7 +43,7 @@ export class BoardService {
       this.http.post(`api/tableau/create`, data,httpOptions).subscribe((result: any )=>{
         
         observer.next(true);
-        
+    
         observer.complete();
         //this.token.saveToken("tableau",result.id)
       for (const index in this.sections) {
@@ -71,6 +71,8 @@ export class BoardService {
       const index: number = this.boardList.indexOf(id);
       if (index !== -1) {
        this.boardList.splice(index, 1);
+      
+      
     }        
       console.log("delete", result)
       },error =>{

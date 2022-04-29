@@ -45,10 +45,13 @@ export class SectionService {
     } );
   }
 
+  //j ai pasbesoin de cette requete car cascade type est Remove
   deleteSection(id: number){
     return new Observable<boolean> ( (observer)=>{
-      this.http.delete(`api/sections/delete/${id}`,httpOptions).subscribe(result => console.log(result) 
-      )
+      this.http.delete(`api/sections/delete/sections/${id}`,httpOptions).subscribe(result => {console.log(result)
+        
+      }
+      );
     });
   }
   
