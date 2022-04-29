@@ -2,6 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
+import { ListSchema } from '../models';
+import { SectionService } from './section.service';
+import { TokenStorageService } from './token-storage.service';
 const httpOptions = {
   headers: new HttpHeaders({ 
     
@@ -16,7 +19,16 @@ const httpOptions = {
 })
 export class BoardService {
   private boardList: any[] = [];
-  constructor(private http: HttpClient) { }
+  list!: ListSchema;
+  sections:any[] =[
+    {nom : "En cours"},
+    {nom : "A venir"},
+    {nom : "terminé"}
+    
+  ];
+  constructor(private http: HttpClient, 
+    private token: TokenStorageService,
+    private section: SectionService) { }
 
   createBoard(bName: string,  u_id: any){
     const data = {
@@ -28,13 +40,17 @@ export class BoardService {
 
     //console.log(data)
     return new Observable<boolean> ( (observer)=>{
-      this.http.post(`api/tableau/create`, data,httpOptions).subscribe(result =>{
+      this.http.post(`api/tableau/create`, data,httpOptions).subscribe((result: any )=>{
         
         observer.next(true);
         
         observer.complete();
-        
-        console.log("bon result",result)
+        //this.token.saveToken("tableau",result.id)
+      for (const index in this.sections) {
+        //console.log("index", this.sections[index].nom)
+        //this.list.name =  this.sections[index].nom
+        this.section.createSection(this.sections[index].nom, result.id).subscribe(res=>console.log(res))
+  }
       }, error =>{
         observer.error(false);
         observer.complete();
@@ -52,6 +68,10 @@ export class BoardService {
       this.http.delete(`api/tableau/${id}`,httpOptions).subscribe((result)=>{
       observer.next(true)
       observer.complete()
+      const index: number = this.boardList.indexOf(id);
+      if (index !== -1) {
+       this.boardList.splice(index, 1);
+    }        
       console.log("delete", result)
       },error =>{
         observer.next(false)

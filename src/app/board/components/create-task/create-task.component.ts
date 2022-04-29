@@ -24,7 +24,8 @@ export class CreateTaskComponent implements OnInit {
   @ViewChild('autosize') autosize!: CdkTextareaAutosize;
   createTask!: FormGroup;
   @Input() connectedOverlay!: CdkConnectedOverlay;
-  selectedPriority!: string;
+  temps! : number;
+  //selectedPriority!: string;
   @Input() task?: TaskSchema;
   @Input() listId?: string;
   formText: string ="";
@@ -43,11 +44,13 @@ export class CreateTaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.setForm();
-    this.selectedPriority = '';
-   if (this.task && this.task.id && this.task.id.length > 0) {
+    this.temps = 0;
+    //this.selectedPriority = '';
+   if (this.task && this.task.id && this.task.id > 0) {
       this.setValuesOnForm(this.task);
       this.formText = 'Editer';
-      this.selectedPriority = this.task.priority;
+      //this.selectedPriority = this.task.priority;
+      this.temps = this.task.temps;
     } else {
       this.formText = 'Creer';
     }
@@ -56,37 +59,38 @@ export class CreateTaskComponent implements OnInit {
   setForm(): void {
     this.createTask = this.fb.group({
       date : [''],
-      priority: [''],
-      description : [ '' ]
-      //temps : ['']
+      //priority: [''],
+      description : [ '' ],
+      temps : ['']
     });
   }
 
   setValuesOnForm(form: TaskSchema): void {
     this.createTask.setValue({
       date: new Date(form.date),
-      priority: form.priority,
-      description: form.description 
+      //priority: form.priority,
+      description: form.description,
+      temps : form.temps 
    });
   }
 
 
   onFormAdd(form: TaskSchema): void {
     if (this.createTask.valid && this.task && !this.task.id) {
-      form.id = generateUniqueId();
+      //form.id = generateUniqueId();
       this.tasksService.addTask(form);
     
       console.log('valid', form.id);
       this.close();
     } else if (this.task && this.listId){
-      const findPriority = this.priorities.find(
+      /*const findPriority = this.priorities.find(
         (element) => form.priority === element.value
-      );
+      );*/
       form.id = this.task.id;
-      form.priority = !findPriority ? this.task.priority : form.priority;
+      //form.priority = !findPriority ? this.task.priority : form.priority;
       form.date = new Date(form.date);
-      console.log("priority", form.priority)
-      if (form.priority) {
+      //console.log("priority", form.priority)
+      if (form.temps) {
         this.tasksService.updateTask(form, this.listId);
         this.close();
       }

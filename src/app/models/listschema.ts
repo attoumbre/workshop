@@ -1,8 +1,8 @@
 import { TaskSchema } from './taskschema';
 
 export interface ListSchema {
-    id: string;
+    id: number;
     name: string;
     tasks: TaskSchema[];
-    //idTableau: number;
+    tableau: number
 }

@@ -5,9 +5,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { TaskService } from 'src/app/core/services/task.service';
-import { TaskSchema } from 'src/app/models';
+import { ListSchema, TaskSchema } from 'src/app/models';
 import { generateUniqueId } from 'src/app/utils';
 import { BoardService } from 'src/app/_services/board.service';
+import { SectionService } from 'src/app/_services/section.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 @Component({
@@ -22,10 +23,16 @@ export class CreateBoardComponent implements OnInit {
   //selectedPriority!: string;
   //@Input() task?: TaskSchema;
   //@Input() listId?: string;
+  passed = false
   formText: string ="";
- 
+  list!: ListSchema;
   nom: any;
-  
+  sections:any[] =[
+    {nom : "En cours"},
+    {nom : "A venir"},
+    {nom : "terminé"}
+    
+  ];
  
   constructor(
     private fb: FormBuilder,
@@ -33,6 +40,7 @@ export class CreateBoardComponent implements OnInit {
     private token : TokenStorageService,
     private _router : Router,
     private _ngZone: NgZone,
+    private section : SectionService
    
   ) {}
 
@@ -61,16 +69,18 @@ export class CreateBoardComponent implements OnInit {
   onFormAdd(form: any): void {
     this.boardService.createBoard(form.nom,this.token.getUser().id).subscribe(result=>
       {
+        //console.log(this.token.getToken("tableau"))
         console.log(result)
-      
+        this.passed=result
         this.close();
         // gerer apres
-        window.location.reload();
+        //window.location.reload();
         
+      
       },error=>{
         console.log(error)
-      })
-    
+      });
+  
  
   }
 

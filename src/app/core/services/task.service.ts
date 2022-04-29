@@ -52,7 +52,7 @@ export class TaskService {
   addTask(data: TaskSchema): void {
     const card = data;
     const elementsIndex = this.list.findIndex(
-      (element) => element.id === '1'
+      (element) => element.id ==1
     );
     this.list[elementsIndex].tasks.push(card);
   }
@@ -68,7 +68,7 @@ export class TaskService {
         if (element.id === data.id) {
           element.date = new Date(data.date);
           element.description = data.description;
-          element.priority = data.priority;
+          element.temps = data.temps;
         }
         return element;
       });
@@ -76,7 +76,7 @@ export class TaskService {
   }
 
   /* Remove a card of board list */
-  removeTask(dataId: string, list: ListSchema): void {
+  removeTask(dataId: number, list: ListSchema): void {
     const elementsIndex = this.list.findIndex(
       (element) => element.id == list.id
     );

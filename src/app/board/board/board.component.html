@@ -1,4 +1,4 @@
-<main class="board" cdkDropListGroup *ngIf="isLoggedIn && hadTable">
+<main class="board" cdkDropListGroup *ngIf="isLoggedIn">
   <button class="board__add"
           cdkOverlayOrigin
           (click)="displayOverlay()"
@@ -24,4 +24,4 @@
   <app-create-task [connectedOverlay]="connectedOverlay" [task]="task" [listId]="listId"></app-create-task>
   </ng-template>
 </main>
-<div *ngIf="isLoggedIn && !hadTable"><span>vous n'avez aucun tableau</span></div>
+<!--<div *ngIf="isLoggedIn && !hadTable"><span>vous n'avez aucun tableau</span></div>-->

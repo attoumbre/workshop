@@ -9,10 +9,11 @@ import { LoginService } from 'src/app/_services/login.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 const initialValue = {
-  id: '',
+  id: 0,
   description: '',
   date: '',
-  priority: '',
+  temps: 0,
+ 
 };
 @Component({
   selector: 'app-home',
@@ -62,9 +63,9 @@ export class HomeComponent implements OnInit {
           let tasks: TaskSchema[] = [];
           lists.map((element: ListSchema )=> {
             element.tasks.map((task: TaskSchema) => {
-              if(task.priority == PriorityType){
+              //if(task.priority == PriorityType){
                 tasks.push(task)
-              }
+              //}
             });
           });
           this.taskList = tasks;
@@ -106,7 +107,8 @@ export class HomeComponent implements OnInit {
             date: event.date,
             id: event.id,
             description: event.description,
-            priority: event.priority,
+            temps: event.temps,
+            userId: this.token.getUser().id
           };
         } else {
           this.task = initialValue;

@@ -27,7 +27,7 @@ export class TaskComponent implements OnInit {
   }
 
 
-  removeTask(taskId: string): void {
+  removeTask(taskId: number): void {
     console.log('Supprimer la tâche', taskId);
     const dialogRef = this.dialog.open(ModalComponent);
     dialogRef.afterClosed().subscribe((result) => {

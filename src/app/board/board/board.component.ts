@@ -11,10 +11,10 @@ import { LoginService } from 'src/app/_services/login.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 const initialValue = {
-  id: '',
+  id: 0,
   description: '',
   date: '',
-  priority: '',
+  temps: 0,
 };
 @Component({
   selector: 'app-board',
@@ -45,9 +45,9 @@ export class BoardComponent implements OnInit {
     //this.getDataList();
     this.loginService.currentState.subscribe(state => this.isLoggedIn = state);
     this.getDataStored();
-    this.board.checkUserBoard(this.token.getUser().id).subscribe(res=>
-      this.hadTable = res
-      );
+    //this.board.checkUserBoard(this.token.getUser().id).subscribe(res=>
+     // this.hadTable = res
+      //);
     
   }
   readonly overlayOptions: Partial<CdkConnectedOverlay> = {
@@ -83,7 +83,7 @@ export class BoardComponent implements OnInit {
         date: event.date,
         id: event.id,
         description: event.description,
-        priority: event.priority,
+        temps: event.temps,
       };
     } else {
       this.task = initialValue;
