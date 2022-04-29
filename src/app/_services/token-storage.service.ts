@@ -9,7 +9,7 @@ export class TokenStorageService {
   signOut(): void {
     window.sessionStorage.clear();
   }
-  public saveToken(token_key:string,token: string): void {
+  public saveToken(token_key:string,token: any): void {
     window.sessionStorage.removeItem(token_key);
     window.sessionStorage.setItem(token_key, token);
   }

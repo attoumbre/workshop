@@ -1,8 +1,18 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError as observableThrowError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { SectionService } from 'src/app/_services/section.service';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 
+    
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '',
+    'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, PUT, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With'
+  })
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -10,10 +20,12 @@ export class ApiService {
   
 
   private apiRoot: string = 'https://run.mocky.io/v3/f9b663f5-bd1b-4efe-a8bc-354fb7f093e7'
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private section : SectionService) { }
 
  /* Get Api Data from mock service */
-  getApi() {
+  getApi(id: any) {
+    return this.http.get<Array<{}>>(`api/sections/recup/${id}`,httpOptions)
+    .pipe(map(data => data), catchError(this.handleError))
     /**
      *  return new Observable<boolean>((observer)=>{
       je dois passer l'id de tableau et l'id de l'utilisateur
@@ -32,10 +44,12 @@ export class ApiService {
         console.log(error)
       });
    } );
-     */
+     
+
     return this.http
       .get<Array<{}>>(this.apiRoot)
-      .pipe(map(data => data), catchError(this.handleError));
+      .pipe(map(data => data), catchError(this.handleError));*/
+    
   }
 
   /* Handle request error */

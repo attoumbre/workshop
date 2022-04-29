@@ -54,5 +54,14 @@ export class SectionService {
       );
     });
   }
+
+  getSectionBoard(id: number){
+    return new Observable<boolean> ( (observer)=>{
+      this.http.get(`api/sections/recup/${id}`,httpOptions).subscribe(result => {console.log(result)
+        
+      }
+      );
+    });
+  }
   
 }

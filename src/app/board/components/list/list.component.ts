@@ -12,7 +12,7 @@ import { LoginService } from 'src/app/_services/login.service';
 })
 export class ListComponent implements OnInit {
 
-  @Input() list!: ListSchema;
+  @Input() list!: any;
   @Output() editTask: EventEmitter<TaskSchema> = new EventEmitter();
   isLoggedIn = false;
   constructor(public tasksService: TaskService, private loginService : LoginService) {}
@@ -33,7 +33,7 @@ export class ListComponent implements OnInit {
     
   }
 
-  handleEdit(task: TaskSchema){
+  handleEdit(task: any){
     if (this.list) {
       task.listId = this.list.id;
       this.editTask.emit(task);

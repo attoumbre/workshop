@@ -12,7 +12,7 @@ import { ModalComponent } from 'src/app/shared/components/modal/modal.component'
 })
 export class TaskComponent implements OnInit {
 
-  @Input() task!: TaskSchema;
+  @Input() task!: any;
   @Input()
   list!: ListSchema;
   @Output() editTask: EventEmitter<TaskSchema> = new EventEmitter();

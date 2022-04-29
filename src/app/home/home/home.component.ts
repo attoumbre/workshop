@@ -88,7 +88,7 @@ export class HomeComponent implements OnInit {
     
     
       getDataList(): void {
-        this.apiService.getApi().subscribe(
+        this.apiService.getApi(6).subscribe(
           (response: any) => this.lists = response['list'],
           (error: string) => console.log('Ups! we have an error: ', error)
         );
@@ -119,6 +119,11 @@ export class HomeComponent implements OnInit {
       }
       getTable(id:number){
         console.log(id)
+        this.section.getSectionBoard(id).subscribe(res=>{console.log(res)
+          
+        });
+
+        this.token.saveToken("tableau", id);
         this._router.navigateByUrl('/board');
       }
       deleteTable(id: number){

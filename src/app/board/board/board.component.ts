@@ -8,6 +8,7 @@ import { TaskService } from 'src/app/core/services/task.service';
 import { ListSchema, TaskSchema } from 'src/app/models';
 import { BoardService } from 'src/app/_services/board.service';
 import { LoginService } from 'src/app/_services/login.service';
+import { SectionService } from 'src/app/_services/section.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 const initialValue = {
@@ -22,9 +23,9 @@ const initialValue = {
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
-  lists: ListSchema[];
-  task: TaskSchema;
-  listId?: string;
+  lists: any[];
+  task: any;
+  listId?: any;
 
   loginSubscription : Subscription = new Subscription;
   isLoggedIn = false;
@@ -35,16 +36,22 @@ export class BoardComponent implements OnInit {
     private taskService: TaskService, 
     private loginService : LoginService,
     private board : BoardService,
-    private token: TokenStorageService) {
+    private token: TokenStorageService,
+    private section : SectionService) {
     this.lists = [];
     this.task = initialValue;
   }
   
   
   ngOnInit(): void {
-    //this.getDataList();
+    
     this.loginService.currentState.subscribe(state => this.isLoggedIn = state);
-    this.getDataStored();
+    if( this.isLoggedIn){
+      this.getDataList(this.token.getToken("tableau"));
+      this.getDataStored();
+    }
+    //console.log("tableau affiché", this.token.getToken("tableau"))
+    
     //this.board.checkUserBoard(this.token.getUser().id).subscribe(res=>
      // this.hadTable = res
       //);
@@ -61,11 +68,16 @@ export class BoardComponent implements OnInit {
   }
 
 
-  getDataList(): void {
-    this.apiService.getApi().subscribe(
+  getDataList(id: any): void {
+    /*this.apiService.getApi().subscribe(
       (response: any) => this.lists = response['list'],
       (error: string) => console.log('Ups! we have an error: ', error)
-    );
+    );*/
+    this.apiService.getApi(id).subscribe((result :any)=> {
+      console.log("api",result)
+      this.lists = result
+    },(error: string) => console.log('Ups! we have an error: ', error))
+    
   }
 
   getDataStored(): void {
@@ -74,10 +86,13 @@ export class BoardComponent implements OnInit {
         (response: any) => this.lists = response,
         (error: string) => (console.log('Ups! we have an error: ', error))
     );
+
+    
   }
 
   displayOverlay(event?: any): void {
     this.isOverlayDisplayed = true;
+    
     if (!!event) {
       this.task = {
         date: event.date,
@@ -88,9 +103,9 @@ export class BoardComponent implements OnInit {
     } else {
       this.task = initialValue;
     }
-
-    if(event.listId){
-      this.listId = event.listId;
+    
+    if(this.lists){
+      this.listId = this.lists[0].id;
     }
   }
 }

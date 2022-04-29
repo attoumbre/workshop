@@ -6,6 +6,7 @@ import { take } from 'rxjs/operators';
 import { TaskService } from 'src/app/core/services/task.service';
 import { TaskSchema } from 'src/app/models/taskschema';
 import { generateUniqueId } from 'src/app/utils';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 type DropdownObject = {
   value: string;
@@ -27,7 +28,7 @@ export class CreateTaskComponent implements OnInit {
   temps! : number;
   //selectedPriority!: string;
   @Input() task?: TaskSchema;
-  @Input() listId?: string;
+  @Input() listId?: any;
   formText: string ="";
 
   priorities: DropdownObject[] = [
@@ -38,7 +39,8 @@ export class CreateTaskComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _ngZone: NgZone,
-    private tasksService: TaskService
+    private tasksService: TaskService,
+    private token : TokenStorageService
   ) {}
 
 
@@ -78,9 +80,13 @@ export class CreateTaskComponent implements OnInit {
   onFormAdd(form: TaskSchema): void {
     if (this.createTask.valid && this.task && !this.task.id) {
       //form.id = generateUniqueId();
-      this.tasksService.addTask(form);
+      form.userId = this.token.getUser().id;
+      form.listId = this.listId
+      this.tasksService.addTask(form).subscribe((result : any)=> 
+        console.log('valid', form.id)
+        );
     
-      console.log('valid', form.id);
+      
       this.close();
     } else if (this.task && this.listId){
       /*const findPriority = this.priorities.find(
