@@ -45,17 +45,30 @@
       
         <div *ngFor="let item of listBoard">
           <div class="home__task-list__buttons">
+            <div class="option-button">
             <button
-              class="option-button"
+              
               mat-button
               mat-raised-button
-              (click)="getTable()"
+              (click)="getTable(item.id)"
             >
               <mat-icon aria-hidden="false"
                         aria-label="urgent icon">note
                 </mat-icon> {{ item.nom }}
+                
             </button>
-           
+            <button
+            class="option-button"
+            mat-button
+            mat-raised-button
+            (click)="deleteTable(item.id)"
+          >
+            <mat-icon aria-hidden="false"
+                      aria-label="urgent icon">delete
+              </mat-icon> 
+              
+          </button>
+        </div>
           </div>
            
         </div>

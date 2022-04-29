@@ -114,8 +114,20 @@ export class HomeComponent implements OnInit {
   
       }
 
-      getTable(){
+      getTable(id:number){
+        console.log(id)
         this._router.navigateByUrl('/board');
       }
-    
+      deleteTable(id: number){
+        console.log(id)
+        this.board.deleteBoard(id).subscribe((res: any)=>
+          console.log(res)
+          );
+        //apres supression reload la page
+        //this.reLoard()
+      }
+
+      reLoard():void{
+        window.location.reload()
+      }
 }

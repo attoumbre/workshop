@@ -46,6 +46,21 @@ export class BoardService {
   getlist(): any[] {
     return this.boardList;
   }
+  deleteBoard(id:number): any{
+    //let endPoint =`${id}`;
+    return new Observable<boolean> ( (observer)=>{
+      this.http.delete(`api/tableau/${id}`,httpOptions).subscribe((result)=>{
+      observer.next(true)
+      observer.complete()
+      console.log("delete", result)
+      },error =>{
+        observer.next(false)
+        observer.complete()
+      }
+    
+    )
+    });
+  }
   checkUserBoard(id: number){
     const data = {
       idUser: id
