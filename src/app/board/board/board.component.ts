@@ -7,6 +7,7 @@ import { TaskService } from 'src/app/core/services/task.service';
 
 import { ListSchema, TaskSchema } from 'src/app/models';
 import { BoardService } from 'src/app/_services/board.service';
+import { FichesService } from 'src/app/_services/fiches.service';
 import { LoginService } from 'src/app/_services/login.service';
 import { SectionService } from 'src/app/_services/section.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
@@ -35,7 +36,7 @@ export class BoardComponent implements OnInit {
   constructor(private apiService: ApiService, 
     private taskService: TaskService, 
     private loginService : LoginService,
-    private board : BoardService,
+    private fiche : FichesService,
     private token: TokenStorageService,
     private section : SectionService) {
     this.lists = [];
@@ -75,6 +76,17 @@ export class BoardComponent implements OnInit {
     );*/
     this.apiService.getApi(id).subscribe((result :any)=> {
       console.log("api",result)
+      
+      for( const item in result){
+        if( result != null){
+          this.fiche.getFicheSectionBoard(result[item].id).subscribe((response : any)=>{
+            result[item].fiches = response
+
+          })
+        }
+
+      }
+      console.log("dodo", result)
       this.lists = result
     },(error: string) => console.log('Ups! we have an error: ', error))
     

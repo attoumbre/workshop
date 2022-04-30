@@ -19,7 +19,7 @@ const httpOptions = {
 export class ApiService {
   
 
-  private apiRoot: string = 'https://run.mocky.io/v3/f9b663f5-bd1b-4efe-a8bc-354fb7f093e7'
+  
   constructor(private http: HttpClient, private section : SectionService) { }
 
  /* Get Api Data from mock service */
