@@ -66,12 +66,17 @@ export class SectionService {
   
   upDateSection(section : any){
     const data = {
-      lib: section.lib ,
-      tableau:{
-        id: section.tableau    }  
+        id : section.fiches[0].id,
+        date : section.fiches[0].date,
+        description: section.fiches[0].description ,
+        temps : section.fiches[0].temps,
+        section : {
+          id : section.fiches[0].listId
+        }
+
     }
     return new Observable<boolean> ((observer)=>{
-      this.http.put(`api/sections`, data, httpOptions).subscribe(result => {console.log(result)
+      this.http.put(`api/fiches`, data, httpOptions).subscribe(result => {console.log(result)
       })
     });
 

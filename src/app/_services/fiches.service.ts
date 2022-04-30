@@ -23,11 +23,20 @@ export class FichesService {
       });
   }
 
-  update(fiche: any){
-   
-    return new Observable<any> ( (observer)=>{
-      this.http.put(`api/fiches`,fiche,httpOptions).subscribe(result => result
-      );
-      });
+  update(section: any){
+    const data = {
+      id : section.fiches[0].id,
+      date : section.fiches[0].date,
+      description: section.fiches[0].description ,
+      temps : section.fiches[0].temps,
+      section : {
+        id : section.fiches[0].listId
+      }
+
+  }
+  return new Observable<boolean> ((observer)=>{
+    this.http.put(`api/fiches`, data, httpOptions).subscribe(result => {console.log(result)
+    })
+  });
   }
 }
