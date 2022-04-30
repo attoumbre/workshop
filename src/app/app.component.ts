@@ -10,12 +10,12 @@ import { LoginService } from './_services/login.service';
 export class AppComponent {
   title = 'workshop';
   isLoggedIn = false;
-
+  loginSubscription: Subscription = new Subscription;
   constructor(private loginService: LoginService){
     this.loginSubscription = this.loginService.currentState.subscribe(state => this.isLoggedIn = state);
   }
 
-  loginSubscription: Subscription = new Subscription;
+  
   
   connectionState(event : any){
     alert(event);

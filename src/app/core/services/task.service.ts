@@ -21,7 +21,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class TaskService {
-  private readonly boardList = new BehaviorSubject<ListSchema[]>([]);
+  private readonly boardList = new BehaviorSubject<any[]>([]);
   readonly list$ = this.boardList.asObservable();
   readonly getBoardList$ = this.list$.pipe(map((list) => list));
 
@@ -95,20 +95,22 @@ export class TaskService {
   }
 
   /* Edit card on list */
-  updateTask(data: any, listId: any): void {
-    listId="1"
+  updateTask(data: any, listId: any): any{
     if (data) {
       const elementsIndex = this.list.findIndex(
         (element) => element.id === listId
       );
-      const task = this.list[elementsIndex].tasks.map((element: any) => {
+      const task = this.list[elementsIndex].fiches.map((element: any) => {
         if (element.id === data.id) {
           element.date = new Date(data.date);
           element.description = data.description;
           element.temps = data.temps;
+      
         }
+        
         return element;
       });
+      console.log("element",this.list)
     }
   }
 
@@ -117,10 +119,10 @@ export class TaskService {
     const elementsIndex = this.list.findIndex(
       (element) => element.id == list.id
     );
-    const tasks = this.list[elementsIndex].tasks.filter(
+    const tasks = this.list[elementsIndex].fiches.filter(
       (task: any) => task.id !== dataId
     );
-    this.list[elementsIndex].tasks = tasks;
+    this.list[elementsIndex].fiches = tasks;
   }
 
 }

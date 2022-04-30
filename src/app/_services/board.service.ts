@@ -99,7 +99,7 @@ export class BoardService {
             for (const index in result) {
               let inData = false;
               for( const item in this.boardList){
-                if(this.boardList[item] ==  result[index]){
+                if(this.boardList[item].id ==  result[index].id){
                   inData = true
                 }
               }

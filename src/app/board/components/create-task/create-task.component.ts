@@ -27,7 +27,7 @@ export class CreateTaskComponent implements OnInit {
   @Input() connectedOverlay!: CdkConnectedOverlay;
   temps! : number;
   //selectedPriority!: string;
-  @Input() task?: TaskSchema;
+  @Input() task?: any;
   @Input() listId?: any;
   formText: string ="";
 

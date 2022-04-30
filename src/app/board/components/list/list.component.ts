@@ -3,6 +3,8 @@ import { ListSchema, TaskSchema } from 'src/app/models';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { TaskService } from 'src/app/core/services/task.service';
 import { LoginService } from 'src/app/_services/login.service';
+import { FichesService } from 'src/app/_services/fiches.service';
+import { SectionService } from 'src/app/_services/section.service';
 
 
 @Component({
@@ -15,7 +17,9 @@ export class ListComponent implements OnInit {
   @Input() list!: any;
   @Output() editTask: EventEmitter<TaskSchema> = new EventEmitter();
   isLoggedIn = false;
-  constructor(public tasksService: TaskService, private loginService : LoginService) {}
+  constructor(public tasksService: TaskService, 
+    private loginService : LoginService,
+    private section: SectionService) {}
 
   drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
@@ -36,6 +40,9 @@ export class ListComponent implements OnInit {
   handleEdit(task: any){
     if (this.list) {
       task.listId = this.list.id;
+      console.log("affiche",this.list)
+      //this.section.upDateSection(this.list).subscribe(res => console.log("le result",res))
+      
       this.editTask.emit(task);
     }
   }

@@ -11,11 +11,13 @@ import { HomeModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
 import {MatIconModule} from '@angular/material/icon';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { LogoutComponent } from './logout/logout.component';
 
 export * from './models/index';
 @NgModule({
   declarations: [
     AppComponent,
+    LogoutComponent,
  
   ],
   imports: [
