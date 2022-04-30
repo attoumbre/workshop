@@ -64,5 +64,17 @@ export class SectionService {
     });
   }
   
+  upDateSection(section : any){
+    const data = {
+      lib: section.lib ,
+      tableau:{
+        id: section.tableau    }  
+    }
+    return new Observable<boolean> ((observer)=>{
+      this.http.put(`api/sections`, data, httpOptions).subscribe(result => {console.log(result)
+      })
+    });
+
+  }
   
 }

@@ -41,7 +41,7 @@ export class ListComponent implements OnInit {
     if (this.list) {
       task.listId = this.list.id;
       console.log("affiche",this.list)
-      //this.section.upDateSection(this.list).subscribe(res => console.log("le result",res))
+      this.section.upDateSection(this.list).subscribe(res => console.log("le result",res))
       
       this.editTask.emit(task);
     }
