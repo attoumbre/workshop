@@ -1,27 +1,101 @@
-# Workshop
+<div align="center" id="top"> 
+  <img src="./.github/app.gif" alt="Angular" />
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.0.
+  &#xa0;
 
-## Development server
+  <!-- <a href="https://angular.netlify.app">Demo</a> -->
+</div>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+<h1 align="center">KanbanBoard</h1>
 
-## Code scaffolding
+<p align="center">
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/attoumbre/workshop?color=56BEB8">
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+  <img alt="Github language count" src="https://img.shields.io/github/languages/count/attoumbre/workshop?color=56BEB8">
 
-## Build
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/attoumbre/workshop?color=56BEB8">
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+  <img alt="License" src="https://img.shields.io/github/license/attoumbre/workshop?color=56BEB8">
 
-## Running unit tests
+  <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/{{YOUR_GITHUB_USERNAME}}/angular?color=56BEB8" /> -->
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+  <!-- <img alt="Github forks" src="https://img.shields.io/github/forks/{{YOUR_GITHUB_USERNAME}}/angular?color=56BEB8" /> -->
 
-## Running end-to-end tests
+  <!-- <img alt="Github stars" src="https://img.shields.io/github/stars/{{YOUR_GITHUB_USERNAME}}/angular?color=56BEB8" /> -->
+</p>
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+<!-- Status -->
 
-## Further help
+<!-- <h4 align="center"> 
+	🚧  Angular 🚀 Under construction...  🚧
+</h4> 
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+<hr> -->
+
+<p align="center">
+  <a href="#dart-about">About</a> &#xa0; | &#xa0; 
+  <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
+  <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
+  <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
+  <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
+  <a href="#memo-license">License</a> &#xa0; | &#xa0;
+  <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">Author</a>
+</p>
+
+<br>
+
+## About ##
+
+Backend+ Frontend d'un projet de Kanban board.
+
+## Fonctionnalitées ##
+
+Creation d'un utilisateur;\
+Login d'un utilisateur;\
+Creation et suppression d'un tableau  (le front n'est pas mis à jour directement);\
+Creation et suppression des fiches (la mise à jour pas fonctionnelle);
+
+## Technologies ##
+
+Les outils suivants ont été utilisés dans le cadre de ce projet:
+
+- [Expo](https://expo.io/)
+- [Node.js](https://nodejs.org/en/)
+- [Angular](https://angular.io/)
+- [Angular Material](https://material.angular.io/)
+- [TypeScript](https://www.typescriptlang.org/)
+
+## Pré-requis ##
+
+Avant de commencer, vous devez avoir installé [Git](https://git-scm.com) et [Node](https://nodejs.org/en/).
+
+## Starting ##
+
+```bash
+# Clone this project
+$ git clone https://gitlab.istic.univ-rennes1.fr/kattoumbre/front-dashboard
+
+# Access
+$ cd workshop
+
+# Install dependencies
+$ yarn
+
+# Run the project
+$ yarn start
+
+# The server will initialize in the <http://localhost:4200>
+```
+## Version ##
+
+Dernière version stable : Sur la branche Master
+## Licence ##
+
+Ce projet est sous licence MIT. Pour plus de détails, voir le fichier [LICENSE](LICENSE.md).
+
+## Auteurs ##
+Made with :hearts: by <a href="https://github.com/attoumbre" target="_blank">{{Juvénal ATTOUMBRE and Nadège YEO}}</a>
+
+&#xa0;
+
+<a href="#top">Back to top</a>
