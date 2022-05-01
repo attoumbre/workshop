@@ -1,5 +1,5 @@
 <div align="center" id="top"> 
-  <img src="./.github/app.gif" alt="Angular" />
+  <img src="./src/favicon.ico" alt="Angular" />
 
   &#xa0;
 
