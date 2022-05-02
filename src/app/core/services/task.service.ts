@@ -65,7 +65,7 @@ export class TaskService {
   }
 
   /* Add new card to board list */
-  addTask(data: TaskSchema):any {
+  addTask(data: any):any {
 
     const card = {
       description: data.description ,
@@ -78,6 +78,7 @@ export class TaskService {
       date: data.date,
       temps: data.temps  
     }
+    console.log("card", card)
     return new Observable<boolean> ( (observer)=>{
       this.http.post(`api/fiches/create`,card,httpOptions).subscribe((result: any) => {
         console.log('result',result)
@@ -122,6 +123,7 @@ export class TaskService {
     const tasks = this.list[elementsIndex].fiches.filter(
       (task: any) => task.id !== dataId
     );
+    console.log('list', this.list)
     this.list[elementsIndex].fiches = tasks;
   }
 

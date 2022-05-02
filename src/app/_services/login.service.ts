@@ -8,7 +8,6 @@ export class LoginService {
 
   private messageSource = new BehaviorSubject(false);
   currentState = this.messageSource.asObservable();
-
   constructor() { }
 
   changeMessage(isLogin: boolean) {

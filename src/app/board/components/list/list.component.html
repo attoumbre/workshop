@@ -4,7 +4,7 @@
 	id="list_{{list.id}}"  
 	cdkDropList
 	[cdkDropListData]="list.fiches"
-	(cdkDropListDropped)="drop($event)"
+	(cdkDropListDropped)="drop($event, list)"
 >
 	<h3 class="list__title"><strong>{{list.lib}}</strong></h3>
 	<div class="list__tasks">

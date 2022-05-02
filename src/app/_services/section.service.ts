@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Token } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListSchema } from '../models';
+import { TokenStorageService } from './token-storage.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 
@@ -17,7 +19,8 @@ const httpOptions = {
 })
 export class SectionService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private token : TokenStorageService) { }
 
   
   createSection(name: string, id_t: any){
@@ -64,19 +67,20 @@ export class SectionService {
     });
   }
   
-  upDateSection(section : any){
+  upDateSection(id: any, lib : any){
+
+    
     const data = {
-        id : section.fiches[0].id,
-        date : section.fiches[0].date,
-        description: section.fiches[0].description ,
-        temps : section.fiches[0].temps,
-        section : {
-          id : section.fiches[0].listId
+        id : id,
+        lib : lib,
+        tableau : {
+          id : this.token.getToken("tableau").id
         }
 
     }
+    console.log(data)
     return new Observable<boolean> ((observer)=>{
-      this.http.put(`api/fiches`, data, httpOptions).subscribe(result => {console.log(result)
+      this.http.put(`api/sections`, data, httpOptions).subscribe(result => {console.log(result)
       })
     });
 

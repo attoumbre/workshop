@@ -34,7 +34,7 @@ export class AuthService {
         observer.complete();
         //isloggedin prend la valeur 1 lorsque la connexion réuissie
         this.token.setUser(result)
-        
+      
         localStorage.setItem("isLoggedIn","1");
         //console.log("le bon",result)
       }, error =>{

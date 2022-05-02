@@ -23,17 +23,18 @@ export class FichesService {
       });
   }
 
-  update(section: any){
+  update(fiches: any , idSection: any){
     const data = {
-      id : section.fiches[0].id,
-      date : section.fiches[0].date,
-      description: section.fiches[0].description ,
-      temps : section.fiches[0].temps,
+      id : fiches.id,
+      date : fiches.date,
+      description: fiches.description ,
+      temps : fiches.temps,
       section : {
-        id : section.fiches[0].listId
+        id : idSection
       }
 
   }
+  console.log("fiche", data)
   return new Observable<boolean> ((observer)=>{
     this.http.put(`api/fiches`, data, httpOptions).subscribe(result => {console.log(result)
     })

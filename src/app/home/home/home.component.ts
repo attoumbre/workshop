@@ -6,13 +6,16 @@ import { TaskService } from 'src/app/core/services/task.service';
 import { ListSchema, TaskSchema } from 'src/app/models';
 import { BoardService } from 'src/app/_services/board.service';
 import { LoginService } from 'src/app/_services/login.service';
+
+
 import { SectionService } from 'src/app/_services/section.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
+
 
 const initialValue = {
   id: 0,
   description: '',
-  date: '',
+  date: new Date(),
   temps: 0,
  
 };

@@ -70,10 +70,7 @@ export class BoardComponent implements OnInit {
 
 
   getDataList(id: any): void {
-    /*this.apiService.getApi().subscribe(
-      (response: any) => this.lists = response['list'],
-      (error: string) => console.log('Ups! we have an error: ', error)
-    );*/
+  
     this.apiService.getApi(id).subscribe((result :any)=> {
       console.log("api",result)
       
@@ -115,7 +112,7 @@ export class BoardComponent implements OnInit {
     } else {
       this.task = initialValue;
     }
-    
+    console.log(event)
     if(this.lists){
       this.listId = this.lists[0].id;
     }
