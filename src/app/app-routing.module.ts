@@ -8,6 +8,11 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'logout',
+    //loadChildren: './board/board.module#BoardModule'
+    loadChildren: () => import('./logout/logout.module').then(m => m.LogoutModule)
+  },
+  {
     path: 'board',
     //loadChildren: './board/board.module#BoardModule'
     loadChildren: () => import('./board/board.module').then(m => m.BoardModule)

@@ -37,4 +37,9 @@ export class TokenStorageService {
     }
     return {};
   }
+
+  public logout(){
+    window.sessionStorage.removeItem(USER_KEY);
+    localStorage.setItem("isLoggedIn","0")
+  }
 }

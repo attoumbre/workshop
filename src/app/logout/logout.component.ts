@@ -1,6 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../_services/login.service';
+import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
   selector: 'app-logout',
@@ -8,9 +9,11 @@ import { LoginService } from '../_services/login.service';
   styleUrls: ['./logout.component.scss']
 })
 export class LogoutComponent implements OnInit {
-  constructor(){}
+  constructor(private token : TokenStorageService, private _router : Router){
+    this.token.logout();
+    this._router.navigateByUrl('/signin')
+  }
   ngOnInit(): void {
-    
   }
 
   
