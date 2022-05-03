@@ -34,26 +34,26 @@
 
 <p align="center">
   <a href="#dart-about">About</a> &#xa0; | &#xa0; 
-  <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
+  <a href="#sparkles-features">Fonctionnalitées</a> &#xa0; | &#xa0;
   <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
-  <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
-  <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
-  <a href="#memo-license">License</a> &#xa0; | &#xa0;
-  <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">Author</a>
+  <a href="#white_check_mark-requirements">Pré-requis</a> &#xa0; | &#xa0;
+  <a href="#checkered_flag-starting">Démarrage</a> &#xa0; | &#xa0;
+  <a href="#memo-license">Licencee</a> &#xa0; | &#xa0;
+  <a href="https://github.com/attoumbre" target="_blank">Author</a>
 </p>
 
 <br>
 
 ## About ##
 
-Backend+ Frontend d'un projet de Kanban board.
+Frontend d'un projet de Kanban board.
 
 ## Fonctionnalitées ##
 
 Creation d'un utilisateur;\
 Login d'un utilisateur;\
 Creation et suppression d'un tableau  (le front n'est pas mis à jour directement);\
-Creation et suppression des fiches (la mise à jour pas fonctionnelle);
+Creation, mise à jour et suppression des fiches ;
 
 ## Technologies ##
 
@@ -69,7 +69,7 @@ Les outils suivants ont été utilisés dans le cadre de ce projet:
 
 Avant de commencer, vous devez avoir installé [Git](https://git-scm.com) et [Node](https://nodejs.org/en/).
 
-## Starting ##
+## Démarrage ##
 
 ```bash
 # Clone this project
@@ -87,14 +87,13 @@ $ yarn start
 # The server will initialize in the <http://localhost:4200>
 ```
 ## Version ##
-
 Dernière version stable : Sur la branche Master
-## Licence ##
 
+## Licence ##
 Ce projet est sous licence MIT. Pour plus de détails, voir le fichier [LICENSE](LICENSE.md).
 
 ## Auteurs ##
-Made with :hearts: by <a href="https://github.com/attoumbre" target="_blank">{{Juvénal ATTOUMBRE and Nadège YEO}}</a>
+Made with :hearts: by <a href="https://github.com/attoumbre" target="_blank">Juvénal ATTOUMBRE and Nadège YEO</a>
 
 &#xa0;
 
