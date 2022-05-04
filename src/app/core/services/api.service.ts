@@ -22,7 +22,7 @@ export class ApiService {
   
   constructor(private http: HttpClient, private section : SectionService) { }
 
- /* Get Api Data from mock service */
+ 
   getApi(id: any) {
     return this.http.get<Array<{}>>(`api/sections/recup/${id}`,httpOptions)
     .pipe(map(data => data), catchError(this.handleError))

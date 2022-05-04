@@ -2,7 +2,7 @@ import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { take } from 'rxjs/operators';
+import { first, take } from 'rxjs/operators';
 import { TaskService } from 'src/app/core/services/task.service';
 import { TaskSchema } from 'src/app/models/taskschema';
 import { generateUniqueId } from 'src/app/utils';
@@ -27,6 +27,9 @@ export class CreateTaskComponent implements OnInit {
   @Input() connectedOverlay!: CdkConnectedOverlay;
   temps! : number;
   //selectedPriority!: string;
+  //selectedPriority!: string;
+  @Input()
+  lists!: any[];
   @Input() task?: any;
   @Input() listId?: any;
   formText: string ="";
@@ -78,6 +81,7 @@ export class CreateTaskComponent implements OnInit {
 
 
   onFormAdd(form: TaskSchema): void {
+    console.log(this.lists)
     if (this.createTask.valid && this.task && !this.task.id) {
       //form.id = generateUniqueId();
       form.userId = this.token.getUser().id;
@@ -95,11 +99,16 @@ export class CreateTaskComponent implements OnInit {
       form.id = this.task.id;
       //form.priority = !findPriority ? this.task.priority : form.priority;
       form.date = new Date(form.date);
-      //console.log("priority", form.priority)
-      if (form.temps) {
-        this.tasksService.updateTask(form, this.listId);
-        this.close();
-      }
+      console.log("priority", form)
+      form.userId = this.token.getUser().id;
+      form.listId = this.listId
+      this.tasksService.updateTask(form, this.lists).pipe(first()).subscribe((data)=>{
+          console.log(data)
+      },(error)=>{
+        console.log(error)
+      });
+      this.close();
+     
     }else {
       console.log('édité',  this.listId );
       this.close();

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { first } from 'rxjs';
 
 import { ListSchema, TaskSchema } from 'src/app/app.module';
 import { TaskService } from 'src/app/core/services/task.service';
@@ -52,7 +53,11 @@ export class TaskComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log('Supprimer la tâche', this.list);
       if (this.list) {
-        this.tasksService.removeTask(taskId, this.list);
+        this.tasksService.removeTask(taskId, this.list).pipe(first()).subscribe((data)=>{
+          console.log(data)
+      },(error)=>{
+        console.log(error)
+      });
       }
     });
 }

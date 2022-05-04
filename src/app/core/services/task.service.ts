@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ListSchema, TaskSchema } from 'src/app/models';
+import { LoginService } from 'src/app/_services/login.service';
 import { SectionService } from 'src/app/_services/section.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 import { ApiService } from './api.service';
@@ -24,19 +25,26 @@ export class TaskService {
   private readonly boardList = new BehaviorSubject<any[]>([]);
   readonly list$ = this.boardList.asObservable();
   readonly getBoardList$ = this.list$.pipe(map((list) => list));
-
+  isLoggedIn = false
   constructor(private apiService: ApiService, 
     private token : TokenStorageService,
-    private http: HttpClient) {
-    this.loadInitialData(this.token.getToken("tableau"));
+    private http: HttpClient,
+    private loginService : LoginService) {
+      this.loginService.currentState.subscribe(state => this.isLoggedIn = state);
+      console.log(this.isLoggedIn)
+      if (this.isLoggedIn && this.token.getToken("tableau")){
+        this.loadInitialData(this.token.getToken("tableau"));
+      }
   }
 
   /* Load initial data to render in a component */
   loadInitialData(id: any): any {
     return this.apiService.getApi(id).subscribe((response: any) => {
+      console.log("reponse",response)
       if (!!response) {
         this.boardList.next(response);
       }
+     
     });
     
 
@@ -96,35 +104,77 @@ export class TaskService {
   }
 
   /* Edit card on list */
-  updateTask(data: any, listId: any): any{
-    if (data) {
-      const elementsIndex = this.list.findIndex(
-        (element) => element.id === listId
-      );
-      const task = this.list[elementsIndex].fiches.map((element: any) => {
-        if (element.id === data.id) {
-          element.date = new Date(data.date);
-          element.description = data.description;
-          element.temps = data.temps;
-      
+  updateTask(data: any, list: any): Observable<any>{
+    //console.log("data", data.id)
+    let modifier = false
+    this.list.push(list)
+   // console.log(this.list)
+    for( const i in list){
+      if(list[i].fiches){
+        for( const j in list[i].fiches){
+          if(data.id == list[i].fiches[j].id ){
+            modifier = true
+            list[i].fiches[j].date =  new Date(data.date)
+            list[i].fiches[j].description = data.description
+            list[i].fiches[j].temps = data.temps
+          }
         }
-        
-        return element;
-      });
-      console.log("element",this.list)
+      }
     }
+    this.list = list
+   // console.log("la list",this.list)
+   // console.log("task", data)
+    const card = {
+      id: data.id,
+      description: data.description ,
+      section:{
+        id: data.listId
+      }, 
+      user:{
+        id: data.userId
+      },
+      date: data.date,
+      temps: data.temps  
+    }
+  
+   // console.log("task", card)
+   /* return new Observable<boolean> ( (observer)=>{
+      this.http.put<boolean>(`api/fiches/update`,card,httpOptions).subscribe((result) => console.log(result));
+    });*/
+    return this.http.put<any>('api/fiches/update',card,httpOptions)
+    
   }
 
   /* Remove a card of board list */
-  removeTask(dataId: number, list: any): void {
-    const elementsIndex = this.list.findIndex(
+  removeTask(dataId: number, list: any): Observable<any> {
+    /*const elementsIndex = this.list.findIndex(
       (element) => element.id == list.id
     );
-    const tasks = this.list[elementsIndex].fiches.filter(
+    console.log(list)
+    const tasks = list[elementsIndex].fiches.filter(
       (task: any) => task.id !== dataId
-    );
-    console.log('list', this.list)
-    this.list[elementsIndex].fiches = tasks;
+    );*/
+    console.log(list)
+    
+    if(list.fiches){
+      for( const j in list.fiches){
+        
+        if(dataId == list.fiches[j].id ){
+          console.log(list.fiches[j])
+          
+          const tasks = list.fiches[j].filter(
+            (task: any) => task.id !== dataId
+          );
+          list.fiches[j] = tasks;
+        }
+      }
+    }
+    
+    this.list = list
+    //this.list.fiches = tasks
+    //console.log('list', list)
+    //this.list[elementsIndex].fiches = tasks;
+    return this.http.delete(`api/fiches/${dataId}`, httpOptions)
   }
 
 }

@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginService.currentState.subscribe(state => this.isLoggedIn = state);
-    
+    console.log(this.isLoggedIn)
     if (this.isLoggedIn){
       this.board.checkUserBoard(this.token.getUser().id).subscribe(res=>
         this.hadTable = res
@@ -91,7 +91,7 @@ export class HomeComponent implements OnInit {
     
     
       getDataList(): void {
-        this.apiService.getApi(6).subscribe(
+        this.apiService.getApi(this.token.getToken("tableau")).subscribe(
           (response: any) => this.lists = response['list'],
           (error: string) => console.log('Ups! we have an error: ', error)
         );
@@ -122,10 +122,11 @@ export class HomeComponent implements OnInit {
       }
       getTable(id:number){
         console.log(id)
-        this.section.getSectionBoard(id).subscribe(res=>{console.log(res)
+       /* this.section.getSectionBoard(id).subscribe(res=>{console.log(res)
+          
           
         });
-
+*/
         this.token.saveToken("tableau", id);
         this._router.navigateByUrl('/board');
       }
