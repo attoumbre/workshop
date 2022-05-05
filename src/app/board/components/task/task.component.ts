@@ -53,12 +53,13 @@ export class TaskComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log('Supprimer la tâche', this.list);
       if (this.list) {
-        this.tasksService.removeTask(taskId, this.list).pipe(first()).subscribe((data)=>{
+        this.tasksService.removeTask(taskId, this.list).subscribe((data)=>{
           console.log(data)
       },(error)=>{
         console.log(error)
       });
       }
     });
+    
 }
 }

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 import { ListSchema, TaskSchema } from 'src/app/models';
 import { LoginService } from 'src/app/_services/login.service';
 import { SectionService } from 'src/app/_services/section.service';
@@ -39,7 +39,7 @@ export class TaskService {
 
   /* Load initial data to render in a component */
   loadInitialData(id: any): any {
-    return this.apiService.getApi(id).subscribe((response: any) => {
+    return this.apiService.getApi(id).pipe(first()).subscribe((response)=>{
       console.log("reponse",response)
       if (!!response) {
         this.boardList.next(response);
@@ -47,19 +47,6 @@ export class TaskService {
      
     });
     
-
-
-    /*return new Observable<boolean>((observer)=>{
-      this.http.get(`api/user/signup`).subscribe(result=>{
-        observer.next(true);
-        observer.complete();
-
-      }, error=>{
-        observer.next(false);
-        observer.complete();
-      } );
-       
-    });*/
   }
 
   /* getter list of Board */
@@ -94,9 +81,10 @@ export class TaskService {
           (element) => element.id == data.listId
         );
         data.id = result.id
-        console.log("element",this.list[elementsIndex])
         
-        this.list[elementsIndex].fiches.push(data);
+        console.log("element",result.section)
+        
+        //this.list[elementsIndex].fiches.push(data);
       }
       );
     });
@@ -147,33 +135,18 @@ export class TaskService {
 
   /* Remove a card of board list */
   removeTask(dataId: number, list: any): Observable<any> {
-    /*const elementsIndex = this.list.findIndex(
-      (element) => element.id == list.id
-    );
-    console.log(list)
-    const tasks = list[elementsIndex].fiches.filter(
-      (task: any) => task.id !== dataId
-    );*/
-    console.log(list)
-    
-    if(list.fiches){
-      for( const j in list.fiches){
-        
-        if(dataId == list.fiches[j].id ){
-          console.log(list.fiches[j])
-          
-          const tasks = list.fiches[j].filter(
-            (task: any) => task.id !== dataId
-          );
-          list.fiches[j] = tasks;
-        }
-      }
-    }
-    
-    this.list = list
-    //this.list.fiches = tasks
-    //console.log('list', list)
-    //this.list[elementsIndex].fiches = tasks;
+    //this.list = list
+    console.log(this.boardList)
+
+    list.fiches.splice(
+      list.fiches.findIndex(
+        (element : any) => (element.id = list.id)
+      ),
+      1
+    )
+  
+    console.log(this.list)
+    console.log(this.list$)
     return this.http.delete(`api/fiches/${dataId}`, httpOptions)
   }
 

@@ -53,7 +53,7 @@ Frontend d'un projet de Kanban board.
 Creation d'un utilisateur;\
 Login d'un utilisateur;\
 Creation et suppression d'un tableau  (le front n'est pas mis à jour directement);\
-Creation, mise à jour et suppression des fiches ;
+Creation(front pas mis à jour directement ), modification et suppression des fiches ;
 
 ## Technologies ##
 

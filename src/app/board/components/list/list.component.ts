@@ -41,7 +41,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginService.currentState.subscribe(state => this.isLoggedIn = state);
-    
+    console.log(this.list)
   }
 
   handleEdit(task: any){

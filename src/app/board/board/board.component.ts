@@ -1,7 +1,7 @@
 import { state } from '@angular/animations';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { first, Subscription } from 'rxjs';
 import { ApiService } from 'src/app/core/core.module';
 import { TaskService } from 'src/app/core/services/task.service';
 
@@ -49,7 +49,7 @@ export class BoardComponent implements OnInit {
     this.loginService.currentState.subscribe(state => this.isLoggedIn = state);
     if( this.isLoggedIn){
       this.getDataList(this.token.getToken("tableau"));
-      this.getDataStored();
+      //this.getDataStored();
     }
     //console.log("tableau affiché", this.token.getToken("tableau"))
     
@@ -71,7 +71,7 @@ export class BoardComponent implements OnInit {
 
   getDataList(id: any): void {
   
-    this.apiService.getApi(id).subscribe((result :any)=> {
+    this.apiService.getApi(id).pipe(first()).subscribe((result)=>{
       console.log("api",result)
       
       for( const item in result){
@@ -85,14 +85,19 @@ export class BoardComponent implements OnInit {
       }
       console.log("dodo", result)
       this.lists = result
-    },(error: string) => console.log('Ups! we have an error: ', error))
+    
+  },(error)=>{
+    console.log(error)
+  });
+      
     
   }
 
   getDataStored(): void {
     this.taskService.getBoardList$
       .subscribe(
-        (response: any) => this.lists = response,
+        (response: any) => {console.log(response)
+          this.lists = response},
         (error: string) => (console.log('Ups! we have an error: ', error))
     );
 

@@ -18,8 +18,7 @@ export class FichesService {
   constructor(private http : HttpClient) { }
   getFicheSectionBoard(id_s:number): any{
     return new Observable<any> ( (observer)=>{
-      this.http.get(`api/fiches/recup/${id_s}`,httpOptions).subscribe(result => result
-      );
+      this.http.get(`api/fiches/recup/${id_s}`,httpOptions)
       });
   }
 
